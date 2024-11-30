@@ -36,3 +36,12 @@ Proporcionar maior acesso à tecnologia para os estabelecimentos locais.
 Permitir aos clientes uma experiência simples e eficiente, com pedidos realizados pelo smartphone.
 
 Com este sistema, buscamos fortalecer a digitalização do comércio local e tornar o processo de pedidos mais ágil e acessível para todos.
+
+## Orientador 
+Leandro Luiz de Almeida 
+
+## Empresa
+Evandro Paganoti Geronimo
+
+## Aluna
+Karolaine Serodio Mandroti
