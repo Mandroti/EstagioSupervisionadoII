@@ -1,0 +1,206 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;    
+    padding: 0;
+}
+header {            
+    
+    background-size:cover;
+    padding: 5px;
+    text-align: center;
+}
+h1 {
+    color: #333;
+    font-size: 32px;
+}
+img {
+    width: 20vw; 
+    height: auto;
+    max-width: 200px; 
+    display: block;
+    margin: 0 auto; 
+    border: 1px solid black; 
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 3;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7); 
+    
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    text-align: center;
+}
+
+ 
+.buttonOpen {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 25px;
+    font-size: 13px;
+    background-color: #fff;
+    color: rgb(0, 175, 38);
+    cursor: pointer;
+    border-radius: 15px;
+    border: 1px solid lightgray;
+    position: relative; z-index: 1;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+.search-bar {
+    position: relative; 
+    top: calc(100% + 10px); 
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    padding: 10px;
+    z-index: 1; 
+}
+
+.search-bar input[type="text"] {
+    width: calc(100% - 40px); 
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc; 
+}
+
+.search-bar button {
+    padding: 8px;
+    background-color: #e77b50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: nowrap; 
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;      
+    white-space: nowrap;
+}
+
+.buttons::-webkit-scrollbar {
+    display: inline-block; 
+}
+
+.buttonMenu{
+    display: block;          
+    padding: 5px 15px;
+    font-size: 14px;            
+    color: black;
+    cursor: pointer;            
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+    border-color: transparent;
+}
+.card {
+display:flex;
+margin-bottom: 20px;
+position: relative;
+}
+
+.card::after {
+content: '';
+position: absolute;
+bottom: 3px; 
+left: 5%;
+width: 90%;
+height: 1px;
+background-color: #c5c4c4;
+}
+
+.image {
+flex: 0 0 130px; 
+height: 90px; 
+margin-left: 7px;
+margin-top: 15px;
+overflow: hidden;
+}
+
+.image img {
+width: 80%;
+height: 80%;
+object-fit: cover; 
+}
+
+.info {
+padding: 10px;
+}
+
+.price {
+font-weight: bold;
+}
+
+.header {
+width: 100%;
+background-color: #fff;
+
+z-index: 1000;
+transition: top 0.3s ease-in-out; 
+}
+
+.fixed {
+position: fixed;
+top: 0;
+}
+
+
+.search-container {
+position: relative;
+}
+
+input[type="text"] {
+padding-right: 30px; 
+}
+
+.fa-search {
+position: absolute;
+right: 30px; 
+top: 50%;
+transform: translateY(-50%);
+color: #888; 
+}
+
+footer {
+    color: black;  
+    text-align: center;   
+    bottom: 0;
+    width: 100%;
+}
+

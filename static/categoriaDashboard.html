@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="shortcut icon" type="imagem/x-icon" href="/images/browse.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <title>Dashboard - Águia Delivery</title>
+    <script src="config.js"></script>
+    
+</head>
+
+<body onload="listarCategorias()">
+    <!--HEADER-->
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="images/chef.png" alt="logo" style="width: 30px;">
+                </span>
+                <div class="text logo-text">                    
+                    <span class="profession">Águia Delivery</span>
+                </div>
+            </div>
+            <i class='bx bx-chevron-right toggle' style="background-color: #ffbe33"></i>
+        </header>
+    
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class="menu-links recuo">
+                    <li class="nav-link">
+                        <a href="dashboard.html">
+                            <i class='bx bx-home-alt icon'></i>
+                            <span class="text nav-text" style="font-size: 15px;">Início</span>
+                        </a>
+                    </li>       
+                    <hr>
+                    <li class="nav-item">
+                        <i class='bx bx-dots-horizontal icon'></i>
+                        <span style="color: rgb(177, 176, 176);">Opções</span>
+                    </li>
+                    <li class="nav-link">
+                        <a href="dashboard.html">
+                            <i class='bx bx-shopping-bag icon'></i>
+                            <span class="text nav-text" style="font-size: 15px;">Pedidos</span>
+                        </a>
+                    </li>   
+    
+                    <li class="nav-link">
+                        <a href="categoriaDashboard.html">
+                            <i class='bx bx-category icon'></i>
+                            <span class="text nav-text" style="font-size: 15px;">Cardápio</span>
+                        </a>
+                    </li>                 
+                    <li class="nav-link">
+                        <a href="relatorioPedido.html">
+                            <i class='bx bxs-file icon'></i>
+                            <span class="text nav-text" style="font-size: 15px;">Relatório</span>
+                        </a>
+                    </li>     
+                 
+                    <hr>
+                    <li class="nav-item">
+                        <i class='bx bx-dots-horizontal icon'></i>
+                        <span style="color: rgb(177, 176, 176);">Meu Perfil</span>
+                    </li>
+                    <li class="nav-link">
+                        <a href="perfilEstabelecimento.html">
+                            <i class='bx bx-store icon'></i>
+                            <span class="text nav-text" style="font-size: 15px;">Editar Perfil</span>
+                        </a>
+                    </li>  
+                    <li class="nav-link">
+                        <a href="manualUsuario.html" target="_blank">
+                            <!-- Ícone de Warning -->
+                            <i class='bx bx-error-circle icon' style="color: #FF9800;"></i>
+                            <span class="text nav-text" style="font-size: 15px;">Manual</span>
+                        </a>
+                    </li>
+                                                 
+                </ul>
+            </div>         
+    
+            <div class="bottom-content">
+                <ul class="menu-links recuo">
+                    <li>
+                        <a href="index.html">
+                            <i class='bx bx-log-out icon'></i>
+                            <span class="text nav-text" style="font-size: 15px;">Sair</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>   
+    <!--HEADER-->
+
+    <!--MENU-->
+    <section class="home" style="overflow-y: scroll;">
+        
+        <div class="main-content">
+            
+          <div class="container-fluid">
+           
+            <div class="mb-5 text-blue saudacao">
+              <h2 id="saudacao"></h2>
+            </div>
+      
+            
+
+            <div>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-9">
+                        <div class="card card-stats mb-4 mb-xl-2" style="border-color: rgb(4, 214, 50);">
+                            <div class="card-body" >
+                                <div class="row align-items-center">
+                                    <div class="col" id="categorias_">
+
+                                    </div>
+                                    <div class="col-auto">
+                                        <form class="row align-items-center">
+                                            <div class="col">
+                                                <div class="input-group">
+                                                    <input id="produtoBuscar" class="form-control form-control-lg form-control-borderless" type="search" placeholder="Buscar" style="font-size: 14px;">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-success" type="button" style="border-color: transparent;" onclick="buscarCategoriaNovo()"><i class="action-icon fas fa-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="tabelaCategoriasProdutos">
+
+            </div>
+
+            <p></p>
+            <p></p>
+          <!-- <div class="card" style="border: 1px solid transparent; max-height: calc(100vh - 180px); overflow-y: auto;" id="tabelaCategoria"> -->
+           
+          </div>
+        </div>
+    </section>
+    <!--MENU-->
+
+    <!--CADASTRAR CATEGORIA-->
+    <section>
+        <div class="modal" id="modalAdicionarCategoria" style="display:none;">
+            <div class="modal-lg modal-dialog-scrollable" style="padding: 40px;">
+                <div class="modal-content" style=" background-color: #fffffffd; height: 75%;">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Cadastrar Categoria</h5>
+                        <button type="button" class="btn-close" id="fecharModalAdicionarCategoria" aria-label="Close" onclick="fecharModalCategoria()"></button>
+                    </div>
+                    <div class="modal-body">
+                       
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                         
+                           
+                              <a class="nav-item nav-link active" id="basic" data-toggle="tab"  role="tab" aria-controls="nav-home" aria-selected="true" style="font-size: 17x; padding: 15px; border-radius: 0px; width: 170px;"><strong>Detalhes</strong></a>
+                              <a class="nav-item nav-link" id="complementos" data-toggle="tab"  role="tab" aria-controls="nav-home" aria-selected="false" style="font-size: 17x; padding: 15px; border-radius: 0px; width: 170px;"><strong>Complementos</strong></a>
+                           
+                            </div>
+                            
+                        </nav>  
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-basic" role="tabpanel" aria-labelledby="basic">
+                                 <form class="text-start" >   
+                                    <div class="card" style="border-color: transparent; background-color: #fff ;padding: 20px; border-radius: 0px;">           
+                                    <div class="mb-3">
+                                        <label for="insertNome" class="modal-title" style="margin-top: 10px; font-size: 20px;">Selecione o Modelo da Categoria: </label>
+                                    </div>               
+                                
+                                    <div class="mb-3" id="categoriaDiv" style="background-color: #F5F5F5; padding: 8px;">
+                                         
+                                        <div class="form-check form-check-inline" style="margin-top: 10px;">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="comum" value="comum">
+                                            <label class="form-check-label" for="comum">Comum</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="pizza" value="pizza">
+                                            <label class="form-check-label" for="pizza">Pizza</label>
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <div class="col">
+                                            <label for="insertNome" class="modal-title" style="margin-top: 7px; font-size: 17px;">Nome da Categoria:</label>
+                                            <input type="text" class="form-control" id="insertNome" required>
+                                        </div>
+                                        <div class="col-auto">
+                                            <label for="nomeCategoriaComplementoMin" class="modal-title" style="margin-top: 7px; font-size: 17px;">Min. </label>
+                                            <input type="number" class="form-control" id="nomeCategoriaComplementoMin" required style="width: 75px;">
+                                        </div>
+                                        <div class="col-auto">
+                                            <label for="nomeCategoriaComplementoMax" class="modal-title" style="margin-top: 7px; font-size: 17px;">Máx. </label>
+                                            <input type="number" class="form-control" id="nomeCategoriaComplementoMax" required style="width: 75px;">
+                                        </div>
+                                    </div>
+                                    
+                                               
+                                
+                                    <div class="mb-3" id="ifPizza" style="display: none;">
+                                        <label for="insertImagem" class="modal-title" style="font-size: 17px;">Selecione uma imagem:</label>     
+                                        <input type="file" class="form-control" id="insertImagem" accept="image/*" onchange="encodeImageFileAsURL(this)">
+                                    </div>
+                                </div>  
+                                           
+                                <div class="modal-footer" style="position: absolute; bottom: 0; width: 97%; justify-content: flex-end;">
+                                    <button type="submit" id="submit" class="btn btn-primary" style="margin-right: 5px; background-color: #ce2c2c; border-color: transparent; text-decoration: none;" onclick="fecharModalCategoria()">CANCELAR</button>
+                                    <a id="complementos" data-toggle="tab" href="#nav-complementos" role="tab" aria-controls="nav-home" aria-selected="false">
+                                        <button type="submit" id="submit" class="btn btn-primary" style="background-color: #0a7e1a; border-color: transparent; text-decoration: none;" onclick="criarCategoria()">PRÓXIMO</button>
+                                    </a>
+                                </div>
+                                
+                                </form>
+                               
+                            </div>
+                            <div class="tab-pane fade" id="nav-complementos" role="tabpanel" aria-labelledby="complementos">                                 
+                                <form class="text-start" >  
+                                    <div style="margin-top: 20px;">
+                                        <button type="button" id="submit" class="btn btn-primary btn-block w-20" data-toggle="modal" data-target="#modalTabela" style="background-color: darkgrey; border-color: transparent; text-decoration: none; border-radius: 3px;" onclick="carregarComplementosExistentes()">Usar Complementos de Outro Item</button>               
+                                    </div>    
+                                    
+                                   
+                                    <div id="testecategoria">
+
+                                    </div>                                  
+                                                               
+                                    <div class="modal" id="modalTabela" tabindex="-1" role="dialog" aria-labelledby="modalTabelaLabel" aria-hidden="true">
+                                        <div class="modal-lg modal-dialog-scrollable" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalTabelaLabel">Complementos Cadastrados</h5>
+                                                    <button type="button" class="btn-close" id="fecharModalAdicionarCategoria" aria-label="Close" onclick="fecharComplemento()"></button>
+                
+                                                </div>
+                                                
+                                                <div class="modal-body">
+                                                    
+                                                    <table class="table">                                                  
+                                                        <tbody id="tabelaComplementos">
+                                                            
+                                                           
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                    
+                                    <!-- <div class="modal-footer" style="position: absolute; bottom: 0; width: 97%; justify-content: flex-end;">
+                                        <button type="submit" id="submit" class="btn btn-primary" style="margin-right: 5px; background-color: #ce2c2c; border-color: transparent; text-decoration: none;" onclick="fecharModalCategoria()">FINALIZAR</button>
+                                        <a id="variacoes" data-toggle="tab" href="#nav-variacoes" role="tab" aria-controls="nav-home" aria-selected="false">
+                                            <button type="submit" id="submit" class="btn btn-primary" style="background-color: #0a7e1a; border-color: transparent; text-decoration: none;" onclick="pularVariacao()">PRÓXIMO</button>
+                                        </a>                                        
+                                    </div> -->
+                                    <div class="modal-footer" style="position: absolute; bottom: 0; width: 97%; justify-content: flex-end;">
+                                        <button type="submit" id="submit" class="btn btn-primary" style="margin-right: 5px; background-color: #ce2c2c; border-color: transparent; text-decoration: none;" onclick="fecharModalCategoria2()">FINALIZAR</button>
+                                                                                
+                                    </div>
+                                </form> 
+                            </div>            
+                            <div class="tab-pane fade" id="nav-variacoes" role="tabpanel" aria-labelledby="variacoes">                                 
+                                <form class="text-start" >   
+                                    <!-- <div style="margin-top: 20px;">
+                                        <button type="submit" id="submit" class="btn btn-primary btn-block w-20" style="margin-right: 5px; background-color: grey; border-color: transparent; text-decoration: none; border-radius: 3px;" onclick="adicionarComplementoV()">Variação</button>
+                                       <button type="submit" id="submit" class="btn btn-primary btn-block w-20" style="background-color: darkgrey; border-color: transparent; text-decoration: none; border-radius: 3px;" onclick="">Usar Variação de Outro Item</button>            
+                                    </div> -->
+                                    
+                                   
+                                    <div id="testevaraicao" onload="adicionarComplementoV()">
+
+                                    </div>                                  
+                                    
+                                    <div class="modal-footer" style="position: absolute; bottom: 0; width: 97%; justify-content: flex-end;">
+                                        <button type="submit" id="submit" class="btn btn-primary" style="margin-right: 5px; background-color: #ce2c2c; border-color: transparent; text-decoration: none;" onclick="fecharModalCategoria2()">FINALIZAR</button>
+                                                                                
+                                    </div>
+                            </form> 
+                            </div> 
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--EDITAR CATEGORIA-->
+    <section>
+        <div class="modal" id="modalEditarCategoria" style="display:none;">
+            <div class="modal-lg modal-dialog-scrollable" style="padding: 40px;">
+                <div class="modal-content" style=" background-color: #fffffffd; height: 70%;">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar Categoria</h5>
+                        <button type="button" class="btn-close" id="fecharModalAdicionarCategoria" aria-label="Close" onclick="fecharModalCategoria()"></button>
+                    </div>
+                    <div class="modal-body">                    
+                       <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                               <a class="nav-item nav-link active" id="size" data-toggle="tab" href="#nav-size" role="tab" aria-controls="nav-profile" aria-selected="true" st style=" font-size: 17x; padding: 15px; border-radius: 0px; width: 170px;"><strong>Detalhes</strong></a>
+                              <a class="nav-item nav-link" id="borda" data-toggle="tab" href="#nav-borda" role="tab" aria-controls="nav-contact" aria-selected="false" style=" font-size: 17px; padding: 15px; border-radius: 0px; width: 170px;" onclick="carregarComplementosExistentesEditar()"><strong>Complementos</strong></a>
+                            </div>
+                        </nav>  
+                        <div class="tab-content" id="nav-tabContent">
+                           
+                            <div class="tab-pane fade show active" id="nav-size" role="tabpanel" aria-labelledby="size">                                 
+                                <form class="text-start" >   
+                                    <div class="card" style="border-color: transparent; background-color: #fff ;padding: 20px; border-radius: 0px;">           
+
+                                    <div class="mb-3">
+                                        <label for="updateNome" class="modal-title" style="margin-top: 7px; font-size: 17px;">Nome da Categoria: </label>
+                                        <input type="text" class="form-control" id="updateNome"  required> 
+                                    </div>                                              
+                                </div>  
+                                
+                                <div class="modal-footer" style="position: absolute; bottom: 0; width: 97%; justify-content: flex-end;">
+                                    <button type="button" id="submit" class="btn btn-primary" style="margin-right: 5px; background-color: #ce2c2c; border-color: transparent; text-decoration: none;" onclick="fecharModalCategoria()">CANCELAR</button>
+                                    <a id="complementos" data-toggle="tab" href="#nav-complementos" role="tab" aria-controls="nav-home" aria-selected="false">
+                                        <button type="submit" id="submit" class="btn btn-primary" style="background-color: #0a7e1a; border-color: transparent; text-decoration: none;" onclick="registraCategoria()">ALTERAR</button>
+                                    </a>
+                                </div>
+                                </form>          
+                            </div>            
+                            <div class="tab-pane fade" id="nav-borda" role="tabpanel" aria-labelledby="borda"> 
+                                <form class="text-start">
+                                    <table class="table">      
+                                        <div class="d-flex justify-content-between" style="margin-top: 20px;">
+                                            <div>
+                                                <button type="submit" id="submit" class="btn btn-primary" style="background-color: grey; border-color: transparent; text-decoration: none; border-radius: 3px; width: 300px;" onclick="AbreModal_(event)">Novo Complemento</button>
+                                            </div>
+                                            <!-- <div class="d-flex" style="margin-left: 20px;">
+                                                <label id="minimo" for="insertNome" class="modal-title" style="margin-top: 15px; font-size: 17px;">Min. </label>
+                                                <input type="number" class="form-control" id="nomeCategoriaComplementoMin" required style="width: 15%;">
+                                                <label id="maximo" for="insertNome" class="modal-title" style="margin-top: 15px; font-size: 17px; margin-left: 10px;">Máx. </label>
+                                                <input type="number" class="form-control" id="nomeCategoriaComplementoMax" required style="width: 15%;">
+                                            </div>  -->
+                                        </div>
+                                                                          
+                                        <tbody id="tabelaComplementosEditar">
+                                                                                   
+                                        </tbody>
+                                    </table>
+                                </form>                                       
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--CADASTRAR PRODUTO-->
+    <section>
+        <div class="modal" id="modalAdicionarProduto" style="display:none;">
+            <div class="modal-lg modal-dialog-scrollable" style="padding: 20px;">
+                <div class="modal-content" style=" background-color: #fffffffd; height: 80%;">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Adicionar Produto</h5>
+                        <button type="button" class="btn-close" id="fecharModalAdicionarCategoria" aria-label="Close" onclick="fecharModalCategoria()"></button>
+                    </div>
+                    <div class="modal-body">
+                       
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="detalhes" data-toggle="tab" href="#nav-detalhes" role="tab" aria-controls="nav-home" aria-selected="true"  style="font-size: 17x; padding: 15px; border-radius: 0px; width: 170px;"><strong>Detalhes</strong></a>
+                             </div> 
+                        </nav>  
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-detalhes" role="tabpanel" aria-labelledby="detalhes">
+                                 <form class="text-start" >   
+                                        <div class="card" style="border-color: transparent; background-color: #fff ;padding: 20px; border-radius: 0px; margin-top: 20px; display: flex; flex-direction: row;">                                             
+                                            
+                                            <div style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 20px;">
+                                                <div style="flex: 1; max-width: 300px;">
+                                                    <div id="imagePreview" style="width: 300px; height: 300px; background-color: #f5f5f5;"></div>
+                                                    <input type="file" id="inputImage" accept="image/*" style="display: none;" onchange="encodeImageFileAsURL(this)">
+                                                    <button onclick="openFile(event);" style="border-color: #46c758; color: #46c758; width: 300px; background: white; margin-top: 25px; height: 45px;">Selecionar Imagem</button>
+                                                </div>
+                                                <div style="flex: 3; width: 700px; margin-left: 5%;">
+                                                    <label for="nomeProduto" style="font-size: 17px; color: black;">Nome do Produto:</label>
+                                                    <input type="text" id="nomeProduto" name="nomeProduto" style="width: 100%; height: 50px; padding: 10px;">
+                                                    <p></p>
+                                                    <label for="valorProduto" style="font-size: 17px; color: black;">Informe o Valor:</label>
+                                                    <input type="number" id="valorProduto" name="valorProduto" style="width: 100%; height: 50px; padding: 10px;" placeholder="0.00">
+                                                    <p></p>
+                                                    <label for="descricaoProduto" style="font-size: 17px; color: black;">Descrição:</label>
+                                                    <input type="text" id="descricaoProduto" name="descricaoProduto" style="width: 100%; height: 100px; padding: 10px;">                                                
+                                                </div>
+                                                <div style="flex: 3; width: 700px;">
+                                                    <label for="inputCategoria" style="font-size: 17px; color: black;">Categoria:</label>
+                                                    <select style="width: 100%; height: 50px; background-color: white; padding: 10px;" id="inputCategoria"></select>
+                                                </div>
+                                            </div>                                        
+                                        </div>                                    
+                                        <div style="display: flex; justify-content: flex-end;">
+                                            <button type="button" id="submit" class="btn btn-primary btn-block w-20" style="margin-right: 5px; background-color: #ce2c2c; border-color: transparent; text-decoration: none;" onclick="fecharModalCategoria()">CANCELAR</button>
+                                            <button type="submit" id="submit" class="btn btn-primary btn-block w-20" style="background-color: #0dad23; border-color: transparent; text-decoration: none;" onclick="criarProduto()">CADASTRAR</button>           
+                                        </div>                                        
+                                </form>
+                            </div>        
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--EXCLUIR PRODUTO-->
+    <section>
+        <div class="modal" id="modalExcluirProduto" style="display:none;">
+            <div class="modal-content-excluir">
+                <div class="modal-header">
+                    <h5 class="modal-title">Excluir Produto</h5>
+                    <button type="button" class="close" id="fecharModalProduto" style="background-color: transparent; border-color: transparent; font-size: 50px;" >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza de que deseja excluir este produto?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn " data-dismiss="modal" id="fecharModalProdutoo">Fechar</button>
+                    <button type="button" class="btn btn-danger" onclick="confirmarExclusao()">Confirmar Exclusão</button>
+                </div>
+            </div>
+        </div>      
+    </section>
+
+    <!--EXCLUIR COMPLEMENTO-->
+    <section>
+        <div class="modal" id="modalExcluirComplemento" style="display:none;">
+            <div class="modal-content-excluir">
+                <div class="modal-header">
+                    <h5 class="modal-title">Excluir Complemento</h5>
+                    <button type="button" class="close" id="fecharModalProduto" style="background-color: transparent; border-color: transparent; font-size: 50px;" >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza de que deseja excluir este complemento?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn " data-dismiss="modal" id="fecharModalProdutoo">Fechar</button>
+                    <button type="button" class="btn btn-danger" onclick="ExcluirComplemento()">Confirmar Exclusão</button>
+                </div>
+            </div>
+        </div>      
+    </section>
+
+    <!--PAUSAR CATEGORIA-->
+    <section>
+        <div class="modal" id="modalPausarCategoria" style="display:none;">
+            <div class="modal-content-excluir">
+                <div class="modal-header">
+                    <h5 class="modal-title">Pausar Categoria</h5>
+                    <button type="button" class="close" id="fecharModalCategoria" style="background-color: transparent; border-color: transparent; font-size: 50px;" >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza de que deseja pausar esta categoria?
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn " data-dismiss="modal" id="fecharModalCategoria">Fechar</button> -->
+                    <button type="button" class="btn btn-danger" onclick="confirmarPausa()">Confirmar</button>
+                </div>
+            </div>
+        </div>      
+    </section>
+
+    <!--EDITAR PRODUTO-->
+    <section>
+        <div class="modal" id="modalEditarProduto" style="display:none;">
+            <div class="modal-lg modal-dialog-scrollable" style="padding: 40px;">
+                <div class="modal-content" style=" background-color: #fffffffd;  height: 80%;">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar Produto</h5>
+                        <button type="button" class="btn-close" id="fecharModalEditarCategoria" aria-label="Close" onclick="fecharModalCategoria()"></button>
+                    </div>
+                    <div class="modal-body">                       
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="detalhes" data-toggle="tab" href="#nav-detalhes" role="tab" aria-controls="nav-home" aria-selected="true"  style="font-size: 17x; padding: 15px; border-radius: 0px; width: 170px;"><strong>Detalhes</strong></a>
+                           </div>
+                        </nav>  
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-detalhes" role="tabpanel" aria-labelledby="detalhes">
+                                 <form class="text-start" >   
+                                        <div class="card" style="border-color: transparent; background-color: #fff ;padding: 20px; border-radius: 0px; margin-top: 20px; display: flex; flex-direction: row;">                                             
+                                            
+                                            <div style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 20px;">
+                                                <div style="flex: 1; max-width: 300px;">
+                                                   
+                                                    <div id="imagePreview" style="width: 300px; height: 300px; background-color: #f5f5f5;">
+                                                        <img id="previewImage" style="width: 100%; height: 100%;" src="">
+                                                    </div>
+
+                                                    <input type="file" id="updateImagem" accept="image/*" style="display: none;" onchange="encodeImageFileAsURL(this)">
+                                                    <button onclick="openFile(event);" style="border-color: #46c758; color: #46c758; width: 300px; background: white; margin-top: 25px; height: 45px;">Selecionar Imagem</button>
+                                                </div>
+                                                <div style="flex: 3; width: 700px; margin-left: 5%;">
+                                                    <label for="nomeProduto" style="font-size: 17px; color: black;">Nome do Produto:</label>
+                                                    <input type="text" id="updateProduto" name="nomeProduto" style="width: 100%; height: 50px; padding: 10px;">
+                                                    <p></p>
+                                                    <label for="valorProduto" style="font-size: 17px; color: black;">Informe o Valor:</label>
+                                                    <input type="number" id="updateValor" name="valorProduto" style="width: 100%; height: 50px; padding: 10px;" placeholder="0.00">
+                                                    <p></p>
+                                                    <label for="descricaoProduto" style="font-size: 17px; color: black;">Descrição:</label>
+                                                    <input type="text" id="updateDescricao" name="descricaoProduto" style="width: 100%; height: 100px; padding: 10px;">                                                
+                                                </div>
+                                                <div style="flex: 3; width: 700px;">
+                                                    <label for="inputCategoria" style="font-size: 17px; color: black;">Selecione a Categoria:</label>
+                                                    <select style="width: 100%; height: 50px; background-color: white; padding: 10px;" id="updateCategoria"></select>
+                                                </div>
+                                            </div>                                        
+                                        </div>                                    
+                                        <div style="display: flex; justify-content: flex-end;">
+                                            <button type="button" id="submit" class="btn btn-primary btn-block w-20" style="margin-right: 5px; background-color: #ce2c2c; border-color: transparent; text-decoration: none;" onclick="fecharModalCategoria()">CANCELAR</button>
+                                            <button type="submit" id="submit" class="btn btn-primary btn-block w-20" style="background-color: #0dad23; border-color: transparent; text-decoration: none;" onclick="registrarProduto()">ALTERAR</button>           
+                                        </div>                                        
+                                </form>
+                            </div>                           
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--EDITAR COMPLEMENTO-->
+    <section>
+        <div class="modal" id="myModalComple" style="display:none;">
+            <div class="modal-lg modal-dialog-scrollable" style="padding: 40px;">
+                <div class="modal-content" style=" background-color: #fffffffd; height: 45%;">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar Complemento</h5>
+                        <button type="button" class="btn-close" id="fecharModalEditarCategoria" aria-label="Close" onclick="fecharModalCategoria()"></button>
+                    </div>
+                    <div class="modal-body">                       
+                        
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-detalhes" role="tabpanel" aria-labelledby="detalhes">
+                                 <form class="text-start" >   
+                                    <div class="form-group">
+                                        <label for="nome">Nome:</label>
+                                        <input type="text" class="form-control" id="nomeCompl" placeholder="Digite o nome" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="preco">Preço:</label>
+                                        <input type="text" class="form-control" id="precoCompl" placeholder="Digite o preço" required>
+                                    </div>                             
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                <button type="button" class="btn btn-success" onclick="EditarComplementoExistente()">Editar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!--NOVO COMPLEMENTO-->
+    <section>
+        <div class="modal" id="myModalCompleNovo" style="display:none;">
+            <div class="modal-lg modal-dialog-scrollable" style="padding: 40px;">
+                <div class="modal-content" style=" background-color: #fffffffd; height: 45%;">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Adicionar Complemento</h5>
+                        <button type="button" class="btn-close" id="fecharModalEditarCategoria" aria-label="Close" onclick="fecharModalCategoria()"></button>
+                    </div>
+                    <div class="modal-body">                       
+                        
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-detalhes" role="tabpanel" aria-labelledby="detalhes">
+                                 <form class="text-start" >   
+                                    <div class="form-group">
+                                        <label for="nome">Nome:</label>
+                                        <input type="text" class="form-control" id="nomeComplNovo" placeholder="Digite o nome" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="preco">Preço:</label>
+                                        <input type="text" class="form-control" id="precoComplNovo" placeholder="Digite o preço" required>
+                                    </div>                             
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                <button type="button" class="btn btn-success" onclick="AdicionarComplemento_()">Adicionar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</body>
+<!--<script src="js/login.js"></script>-->
+<!-- <script src="js/categoria.js "></script>
+<script src="js/categoriaNovo.js "></script> -->
+<script src="js/dashboard.js"></script>
+<script src="js/categoria.js"></script>
+<script src="js/pizza.js"></script>
+<!-- Adicione o jQuery (necessário para o Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Adicione os scripts do Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    adicionarComplementoV();
+});
+document.addEventListener("DOMContentLoaded", function() {
+    adicionarComplementoC();
+});
+function openFile(event) {
+    event.preventDefault(); // Impede a propagação do evento
+    document.getElementById('inputImage').click();
+}
+
+document.getElementById('inputImage').addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const imgPreview = document.getElementById('imagePreview');
+            imgPreview.innerHTML = `<img src="${event.target.result}" style="width: 100%; height: 100%; object-fit: cover;">`;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+const radioButtons = document.getElementsByName('inlineRadioOptions');
+
+//esconde complemento e variacao
+radioButtons.forEach(function(radio) {
+radio.addEventListener('click', function() {
+    let categoriaSelecionada = '';
+    
+    if (radio.checked) {
+    categoriaSelecionada = radio.value;
+    }
+    
+    if (categoriaSelecionada === 'pizza') {
+    categoriaSelecionada = 1;        
+    document.getElementById('complementos').style.display = 'none';
+    document.getElementById('variacoes').style.display = 'none';
+    document.getElementById('ifPizza').style.display = 'block';
+    } else {
+    
+    document.getElementById('complementos').style.display = 'block';
+    document.getElementById('variacoes').style.display = 'block';
+    document.getElementById('ifPizza').style.display = 'none';
+    }
+});
+});
+
+radioButtons.forEach(function(radio) {
+    radio.addEventListener('click', function() {
+        console.log('Radio selecionado:', radio.value);
+        if (radio.value === 'pizza') {
+            document.getElementById('ifPizza').style.display = 'block';
+        }
+    });
+});
+
+
+function pularVariacao(){
+    document.getElementById('complementos').classList.remove('active');
+    document.getElementById('variacoes').classList.add('active');
+}
+
+function fecharComplemento(){
+    document.getElementById('modalTabela').style.display = 'none'
+}
+
+$('#modalTabela').on('shown.bs.modal', function (e) {
+    // Chamada da função carregarComplementosExistentes ao exibir a modal
+    carregarComplementosExistentes();
+});
+</script>
+</html>

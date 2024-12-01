@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="fonts/icomoon/style.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />    
+  <!-- Style -->
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="shortcut icon" href="images/favicon.png" type="">
+  <title>Águia Delivery</title>
+  <script src="config.js"></script>
+</head>
+<style>
+
+.modal-content-one {
+  background-color: #fefefe;
+  margin: 100% auto; 
+  padding: 20px;
+  width: 80%;
+  text-align: center;
+}
+
+.modal {
+  display: none;
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5); 
+}
+
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 100% auto; 
+  padding: 20px;
+  width: 80%;
+  text-align: center;
+  animation: fadeInOut 3s linear forwards; 
+}
+
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0; 
+  }
+  10% {
+    opacity: 1; 
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0; 
+  }
+} 
+</style>
+<body>  
+  <!--HEADER-->
+  <div class="navbar d-lg-none d-xl-none bg-light navbar-light" style="height: 80px;">
+    <div class="container-fluid">
+        <a href="index.html" class="navbar-brand" style="position: absolute; top: 50%; transform: translateY(-50%);">
+            <img src="images/logoteste.png" alt="Águia Delivery" style="height: 150px; width: auto;">
+        </a>         
+        <div class="collapse navbar-collapse" id="navbarCollapse" style="font-weight: bold;">
+            <ul class="navbar-nav mx-auto"></ul>
+            <div class="user_option mx-auto">              
+            </div>
+        </div>
+    </div>
+  </div>
+  <!--HEADER-->
+  
+  <!--FORMULARIO-->
+  <div class="d-lg-flex half" >
+    <div class="bg order-1 order-md-2 mobile-hidden" style="background: linear-gradient(rgba(39, 44, 56, 0.5), rgba(77, 85, 112, 0.5)), url(images/42.jpg); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+    <div class="contents order-2 order-md-2">
+      <div class="container custom-navbar">
+        <div class="row align-items-center justify-content-center align-items-center-mobile">
+          <div class="col-md-8">
+            <h3>Bem-Vindos ao <strong>Águia Delivery</strong></h3>
+            <p class="mb-4">É um privilégio ter você como nosso cliente, agradecemos pela confiança.</p>
+            <form id="loginForm">
+                <div class="form-group first">
+                  <label for="username">Número de telefone celular ou E-mail</label>
+                  <input type="text" class="form-control" id="username" placeholder="Insira seus dados">
+                </div>
+                <div class="form-group last mb-3">
+                  <label for="password">Senha</label>
+                  <div class="input-group">
+                      <input type="password" class="form-control" placeholder="******" id="password">
+                      <div class="input-group-append">
+                          <span class="input-group-text toggle-password" onclick="exibeSenha('password')">
+                              <i class="bi bi-eye-slash"></i>
+                          </span>
+                      </div>
+                  </div>
+                </div>     
+                <div id="errorUsuario" class="alert alert-danger" style="display:none;">
+                  Usuário ou Senha incorretos. Por favor, tente novamente ou cadastre-se.
+               </div>                
+                <div class="d-flex mb-5 align-items-center"> 
+                  <label class="mb-0"><a href="escolha.html" class="forgot-pass">Deseja criar uma conta.</a></label>
+                  <span class="ml-auto"><a href="escolhaSenha.html" class="forgot-pass">Esqueceu sua Senha?</a></span> 
+                </div>             
+                <input type="submit" id="login" value="ENTRAR" class="btn btn-block" style="background-color: #ffbe33;" onclick="Login(event)"> 
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+  <!--FORMULARIO--> 
+
+  <!--MODAL-->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p style="color: #28a745;">Pedido Enviado com Sucesso!</p>
+    </div>
+  </div>
+  <!--MODAL-->
+
+ <!--MODAL-->
+<div id="modalVerifica" class="modal">
+  <div class="modal-content-one">
+    <span class="close" onclick="fecharModal()">&times;</span>
+    <p>Telefone ainda não foi verificado!</p>
+    <button onclick="reenviarCodigo()" class="btn btn-secondary">Enviar Código</button>
+  </div>
+</div>
+<!--MODAL-->
+
+ <!--MODAL-->
+ <div id="modalVerificaEmail" class="modal">
+  <div class="modal-content-one">
+    <span class="close" onclick="fecharModal()">&times;</span>
+    <p>Email ainda não foi verificado!</p>
+    <button onclick="reenviarCodigoEmail()" class="btn btn-secondary">Reenviar Email</button>
+  </div>
+</div>
+<!--MODAL-->
+
+
+
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/mask.js"></script>
+</body>
+</html>

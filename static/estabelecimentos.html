@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="config.js"></script>  
+    <link rel="stylesheet" href="css/estabelecimento.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <title>Restaurantes</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-JW5qNULeJEYgFOY+dTImdHyQs1cIbtfSl0iyKEtVZuF+M8ZwPrw8FsdZ5EJewSbD" crossorigin="anonymous">
+</head>    
+    <body onload="listarEstabelecimentos()">
+        <!--HEADER-->
+        <div style="background-color: #de080f; padding: 10px 0;">
+            <div id="estabelecimentos" data-page="estabelecimentos">
+                <nav class="navbar" style="margin-top: -10px; padding: 5px 0;">
+                    <i id="menuBtn" class="material-icons" style="color: white;">menu</i>
+                    <a class="navbar-brand" id="estabelecimentoNome" style="color: white; font-size: 18px; margin-left: 6px; font-weight: bold;">
+                        Águia Delivery
+                    </a>
+                    <form class="form-inline" id="formBusca" style="display: none;">
+                        <input class="form-control form-control-no-bg" type="search" placeholder="Buscar" aria-label="Buscar">
+                    </form>
+                    <button class="btn" id="btnBuscar" style="border-color: transparent; margin-top: 10px;">
+                        <!-- <i class="material-icons" id="iconeBuscar" style="color: white; margin-right: 6px;">search</i> -->
+                    </button>
+                </nav>
+            </div>
+      
+        </div>
+        
+        <!--HEADER-->
+
+        <!--BUSCA ESTABELECIMENTOS-->
+        <div>
+            <ul class="list-group" id="estabelecimentosCidade">
+            </ul>
+        </div>
+        <!--BUSCA ESTABELECIMENTOS-->
+    
+        <!--MENU LATERAL-->
+        <div id="menuLateral" class="menu-lateral">
+            <div class="menu-topo">
+                <p id="nomeCliente" style="color: white; font-size: 20px; display: inline;">Olá Visitante!</p>
+                <i id="fecharMenu" class="fas fa-times fechar-menu" style="margin-top: 5px;"></i>
+            </div>
+            
+            <ul>
+        
+                <li style="border-bottom: 1px solid lightgray;">
+                    <i class="fas fa-home" style="vertical-align: middle;"></i>
+                    <a href="index.html" style="color: grey; margin-left: 5px; vertical-align: middle; font-size: 15px;">
+                      Home
+                    </a>                
+                </li>
+                
+                <li id="login" style="border-bottom: 1px solid lightgray; display: flex; align-items: center; display: none;">
+                    <i class="fas fa-user" style="font-size: 18px; margin-right: 5px;"></i>
+                    <a href="login.html" style="color: grey; font-size: 15px; text-decoration: none;">
+                        Login
+                    </a>                
+                </li>
+                <li id="historicos" style="border-bottom: 1px solid lightgray; display: none;">
+                    <i class="fas fa-utensils" style="vertical-align: middle;"></i>
+                    <a href="historicoPedidos.html" style="color: grey; margin-left: 5px; vertical-align: middle; font-size: 15px;">
+                        Histórico de Pedidos
+                    </a>                
+                </li>
+                
+                <li onclick="sair()" id="sairr" style="border-bottom: 1px solid lightgray; display: flex; align-items: center; cursor: pointer; display: none;">
+                    <i class="fas fa-sign-out-alt" style="font-size: 18px; margin-right: 5px;"></i>
+                    <a style="color: grey; margin-left: 5px; vertical-align: middle; font-size: 15px;">
+                        Sair
+                    </a>  
+                </li>
+                  
+                
+            </ul>            
+        </div>
+        <!--MENU LATERAL-->
+
+        <!--FOOTER-->
+        <footer>
+            <p style="font-size: 10px; padding: 15px 0px; color: rgb(158, 158, 158);">&copy; 2024 Águia Delivery. Aplicativo de Delivery da Empresa Águia Sistemas.</p>
+        </footer>
+        <!--FOOTER-->
+    
+        <div class="overlay" id="overlay"></div>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="js/estabelecimento.js"></script>
+        <script>
+
+       
+
+
+            document.getElementById("menuBtn").addEventListener("click", function() {
+            document.getElementById("menuLateral").classList.toggle("show");
+            document.getElementById("overlay").style.display = "block"; 
+        });
+
+        document.getElementById("fecharMenu").addEventListener("click", function() {
+            document.getElementById("menuLateral").classList.remove("show");
+            document.getElementById("overlay").style.display = "none"; 
+        });
+        </script>
+</body>
+</html>

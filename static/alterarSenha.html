@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="fonts/icomoon/style.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">    
+  <!-- Style -->
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="shortcut icon" href="images/favicon.png" type="">
+  <title>Águia Delivery</title>
+  <script src="config.js"></script>
+</head>
+<body>
+
+<!--HEADER-->
+<div class="navbar d-lg-none d-xl-none bg-light navbar-light" style="height: 80px;">
+  <div class="container-fluid">
+      <a href="index.html" class="navbar-brand" style="position: absolute; top: 50%; transform: translateY(-50%);">
+          <img src="images/logoteste.png" alt="Águia Delivery" style="height: 150px; width: auto;">
+      </a>         
+      <div class="collapse navbar-collapse" id="navbarCollapse" style="font-weight: bold;">
+          <ul class="navbar-nav mx-auto"></ul>
+          <div class="user_option mx-auto">              
+          </div>
+      </div>
+  </div>
+</div>
+<!--HEADER-->
+
+<!--FORMULARIO-->
+<div class="d-lg-flex half">
+  <div class="bg order-1 order-md-2 mobile-hidden" style="background: linear-gradient(rgba(39, 44, 56, 0.5), rgba(77, 85, 112, 0.5)), url(images/42.jpg); background-size: cover; background-repeat: no-repeat; background-position: center;">
+  </div>
+  <div class="contents order-2 order-md-2">
+    <div class="container custom-navbar">
+      <div class="row align-items-center justify-content-center align-items-center-mobile">
+        <div class="col-md-9">
+          <h3>Recuperar Senha <strong>Águia Delivery</strong></h3>
+          
+          <form>
+            <div class="form-group ">
+              <label for="username">Insira número de celular:</label>
+              <input type="text" class="form-control" placeholder="Insira seus dados" id="numeroTelefone" onkeyup="checkTelefone(event)" required>
+              <div id="naoTelefone" class="alert alert-danger" style="display:none;">
+                Dados incorretos. Por favor, tente novamente.
+              </div>
+            </div> 
+                                    
+            <input type="submit" value="RECUPERAR" class="btn btn-block" style="background-color: #ffbe33;" onclick="recuperarSenha()">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>   
+<!--FORMULARIO-->
+
+  
+<script src="js/bootstrap.min.js"></script>
+<script src="js/login.js"></script>
+<script src="js/mask.js"></script>
+</body>
+</html>

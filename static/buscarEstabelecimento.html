@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="shortcut icon" type="imagem/x-icon" href="/images/browse.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <title>Dashboard - Águia Delivery</title>
+    <script src="config.js"></script>
+</head>
+
+<body onload="buscarEstabelecimento()">
+
+    <!--HEADER MENU-->
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="images/chef.png" alt="logo" style="width: 30px;">
+                </span>
+                <div class="text logo-text">                    
+                    <span class="profession">Águia Delivery</span>
+                </div>
+            </div>
+            <i class='bx bx-chevron-right toggle' style="background-color: #ffbe33"></i>
+        </header>
+    
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class="menu-links recuo">
+                  <li class="search-box" style="display: none;">
+                  </li>
+                    <li class="nav-link">
+                        <a href="dashboard.html">
+                            <i class='bx bx-home-alt icon'></i>
+                            <span class="text nav-text" style="font-size: 15px;">Início</span>
+                        </a>
+                    </li>       
+                    <hr>
+                    <li class="nav-item">
+                        <i class='bx bx-dots-horizontal icon'></i>
+                        <span style="color: rgb(177, 176, 176);">Realizar Consultas</span>
+                    </li>
+                    <li class="nav-link">
+                        <a href="buscarEstabelecimento.html">
+                            <i class='bx bx-money icon'></i>
+                            <span class="text nav-text" style="font-size: 15px;">Estabelecimentos</span>
+                        </a>
+                    </li>                 
+                    <li class="nav-link">
+                        <a href="buscarCliente.html">
+                            <i class='bx bx-user icon'></i>
+                            <span class="text nav-text" style="font-size: 15px;">Clientes</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>         
+      
+            <div class="bottom-content">
+                <ul class="menu-links recuo">
+                    <li>
+                        <a href="index.html">
+                            <i class='bx bx-log-out icon'></i>
+                            <span class="text nav-text" style="font-size: 15px;">Sair</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--HEADER MENU-->
+
+    <!--ESTABELECIMENTO-->
+    <section class="home">
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="mb-5 text-blue saudacao">
+                <h2 id="saudacao"></h2>
+            </div>        
+            <div class="header-body">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-9">
+                        <div class="card card-stats mb-4 mb-xl-0 border-0">
+                            <div class="card-body" style="background-color: whitesmoke;">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">ESTABELECIMENTOS</h5>
+                                    </div>
+                                    <div class="col-auto">
+                                        <form class="row align-items-center">
+                                            <div class="col">
+                                                <div class="input-group">
+                                                    <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Buscar" style="font-size: 14px;" id="nomeEstabelecimento">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-secondary" type="button" style="border-color: transparent;" onclick="buscarEstabelecimentos()"><i class="action-icon fas fa-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <!-- <button class="btn btn-lg btn-success" type="submit" style="font-size: 14px;" onclick="adicionarEstabelecimento()">Adicionar</button> -->
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        <br>
+
+        <div class="card" style="border: 1px solid transparent; max-height: calc(100vh - 180px); overflow-y: auto;"  id="tabelaEstabelecimento">
+        
+        </div>
+    </div>
+    </section>
+    <!--ESTABELECIMENTO-->
+
+    <!--EXCLUIR ESTABELECIMENTO-->
+    <section>
+        <div class="modal" id="modalExcluirEstabelecimento" style="display:none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Excluir Estabelecimento</h5>
+                    <button type="button" class="close" id="fecharModalEstabelecimento" style="background-color: transparent; border-color: transparent; font-size: 50px;" >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza de que deseja excluir este estabelecimento?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn " data-dismiss="modal" id="fecharModalEstabelecimentoo">Fechar</button>
+                    <button type="button" class="btn btn-danger" onclick="removerEstabelecimento()" data-id="id">Confirmar Exclusão</button>
+                </div>
+            </div>
+        </div>      
+    </section>
+    <!--EXCLUIR ESTABELECIMENTO-->
+
+</body>
+<script src="js/dashboard.js"></script> <!--PRECISA POR CAUSA DA ANIMAÇÃO-->
+<script src="js/estabelecimento.js"></script>
+<!--<script src="js/mask.js"></script>-->
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link para o CSS do Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Opcional: Link para o JavaScript do Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="config.js"></script>
+    <title>Acompanhar Pedido</title>
+    <style>
+        .header-content {
+            display: flex;
+            align-items: center;
+            margin: 10px;
+        }
+
+        .header-content img {
+            width: 20px; 
+        }
+        ul.timeline {
+            list-style-type: none;
+            position: relative;
+        }
+        ul.timeline:before {
+            content: ' ';
+            background: #d4d9df;
+            display: inline-block;
+            position: absolute;
+            left: 29px;
+            width: 2px;
+            height: 100%;
+            z-index: 400;
+        }
+        ul.timeline > li {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        ul.timeline > li:before {
+            content: ' ';
+            background: white;
+            display: inline-block;
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid #d4d9df;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            z-index: 400;
+        }
+        ul.timeline > li.enviado:before {
+            content: ' ';
+            background: white;
+            display: inline-block;
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid #28a745; 
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            z-index: 400;
+        }
+            
+        .list-group-item b { 
+            word-wrap: break-word; 
+        }
+
+        .modal {
+        display: none;
+        position: fixed; 
+        z-index: 1; 
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5); 
+        }
+
+
+        .modal-content {
+        background-color: #fefefe;
+        margin: 100% auto; 
+        padding: 20px;
+        width: 80%;
+        text-align: center;
+ 
+        }
+
+
+        .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+        }
+
+
+        @keyframes fadeInOut {
+        0% {
+            opacity: 0; 
+        }
+        10% {
+            opacity: 1; 
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0; 
+        }
+        }
+
+        @media (min-width: 576px) {
+            .list-group-item b {
+                white-space: normal; 
+            }
+        }
+    </style>
+</head>
+<body onload="carregaDadosPedido()">
+    <!--HEADER-->
+    <header style="margin-bottom: -20px;">
+        <div class="header-content">            
+            <img src="images/arrow.png" alt="Imagem" style="margin-top: 5px;" onclick="abrirHistoricos()">           
+            <div style="margin-left: 15px;">
+                <h5 class="ps-3 mb-0">Status do Pedido</h5>
+            </div>
+            <div style="position: absolute; top: 0; right: 0; margin: 8px;">
+                <!-- <button class="btn btn-danger btn-sm" onclick="mostrarModal()">Cancelar</button> -->
+            </div>
+        </div> 
+    </header>
+    
+    <!--HEADER-->
+
+    <!--SOBRE O PEDIDO-->
+    <section style="background-color: whitesmoke;">
+        <div class="d-flex align-items-center border-bottom" style="margin-top: 35px;">
+            <div style="margin: 8px;" id="pedido_">
+               
+            </div>
+            <div style="right: 0; transform: translateY(-100%); margin-bottom: -55px; margin-left: auto; margin-right: 10px;" id="statusPedido_">
+                
+            </div>                  
+        </div>      
+    </section>
+    <!--SOBRE O PEDIDO-->
+
+    <!--TIMELINE-->
+    <section style="background-color: whitesmoke;" id="timeline">
+        <div class="container">
+            <div class="row">
+                <div>
+                    <ul class="timeline" id="statusTimeline">
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section> 
+    <!--TIMELINE-->
+
+    <!--DETALHES PRODUTO-->
+    <section class="py-3" style="background-color: whitesmoke;">
+        <div class="card" style="padding: 8px; background-color: white;">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row" style="margin-bottom: 3px;">
+                        <div class="col-8 col-md-10">
+                            <h6 class="mb-0">ITENS</h6>
+                        </div>
+                        <div class="col-4 col-md-2">
+                            <h6 class="mb-0">PREÇO</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="list-group list-group-flush" id="produtos_">
+                                                     
+                            </ul>                            
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row" id="sub_">
+                        
+                    </div>
+                    <div class="row" id="entrega_">
+                        
+                    </div>
+                    <div class="row" id="total_">
+                       
+                    </div>
+                </div>
+            </div>             
+        </div>
+    </section>
+    <!--DETALHES PRODUTO-->
+
+    <!--PAGAMENTO E ENTREGA-->
+    <section class="pb-4" style="background-color: whitesmoke;">
+        <div style="padding: 10px;">
+            <div class="row">
+                <div class="col-12" style="padding: 8px;">
+                    <h5 class="mb-0">PAGAMENTO</h5>
+                    <div style="background-color: white;">
+                        <div>
+                            <ul class="list-unstyled" id="pagamento_">
+                                
+                            </ul>
+                        </div>
+                    </div>                   
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12" style="padding: 8px;">
+                    <h5 class="mb-0" >ENTREGA</h5>
+                    <div style="background-color: white;">
+                        <div>
+                            <ul class="list-unstyled" id="ret_">
+                                                              
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    
+    <!--PAGAMENTO E ENTREGA-->
+
+    <!--CANCELAMENTO DO PEDIDO-->
+    <section>
+        <div style="padding: 10px;">
+            <ul style="padding-left: 0; list-style: none; margin: 0;">
+                <li style="display: flex; justify-content: center;">
+                    <div style="width: 100%;">
+                        <button 
+                            id="btnCancelarPedido" 
+                            style="background-color: #ce352c; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 5px; width: 100%;"
+                            onclick="document.getElementById('modal').style.display='block';">
+                            Cancelar Pedido
+                        </button>
+                    </div>
+                </li>
+                <hr style="margin-left: -15px; margin-right: 10px;">
+            </ul>
+        </div>
+    </section>    
+    <!--CANCELAMENTO DO PEDIDO-->
+
+    
+    <div id="modal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5);">
+        <div class="modal-content" style="background-color: white; margin: auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 400px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <span 
+                class="close" 
+                style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;"
+                onclick="document.getElementById('modal').style.display='none';">&times;</span>
+            <p>Deseja realmente solicitar o cancelamento do Pedido?</p>
+            <div>
+                <button 
+                    id="btn-confirmar" 
+                    class="btn btn-success" 
+                    style="background-color: #28a745; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;"
+                    onclick="CancelarPedidoConsumidor();">
+                    Sim
+                </button>
+                <button 
+                    id="btn-cancelar" 
+                    class="btn btn-danger" 
+                    style="background-color: #dc3545; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;"
+                    onclick="document.getElementById('modal').style.display='none';">
+                    Não
+                </button>
+            </div>
+        </div>
+    </div>
+    <!--EXCLUIR PEDIDO-->
+
+    <!--NÃO CANCELOU PEDIDO-->
+    <div id="modalNaoCancelou" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5);">
+        <div class="modal-content" style="background-color: white; margin: auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 400px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <span 
+                class="close" 
+                style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;"
+                onclick="document.getElementById('modal').style.display='none';">&times;</span>
+            <p>Pedido já em produção, entre em contato com o estabelecimento.</p>
+            <div>
+                
+            </div>
+        </div>
+    </div>
+    <!--NÃO CANCELOU PEDIDO-->
+
+    <!--CANCELOU PEDIDO-->
+    <div id="modalCancelou" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5);">
+        <div class="modal-content" style="background-color: white; margin: auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 400px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <span 
+                class="close" 
+                style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;"
+                onclick="document.getElementById('modal').style.display='none';">&times;</span>
+            <p>Pedido cancelado com sucesso!</p>
+            <div>
+                
+            </div>
+        </div>
+    </div>
+    <!--CANCELOU PEDIDO-->
+  </div>
+  
+</body>
+<script src="js/status.js"></script>
+<script>
+    function abrirHistoricos(){
+        window.location.replace("historicoPedidos.html");
+    }
+
+    
+</script>
+
+</html>

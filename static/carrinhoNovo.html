@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link para o CSS do Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Opcional: Link para o JavaScript do Bootstrap -->
+     <!-- Bootstrap CSS -->
+    <script src="config.js"></script>  
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Carrinho</title>
+    <style>
+        .header-content {
+        display: flex;
+        align-items: center;
+        margin: 10px;
+        }
+
+        .header-content img {
+        width: 20px; 
+        }
+
+        /* Estilos para o modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 50% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+    }
+
+    /* Estilos para o botão de fechar */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btn-container {
+        
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn-container button {
+        margin: 0 10px;
+        padding: 10px 20px;
+        border: none;
+        background-color: gray;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-container button:hover {
+        background-color: lightgray;
+    }
+    </style>
+</head>
+<body onload="verificarAutenticacao()">
+
+    <!--HEADER-->
+    <header style="margin-bottom: -20px;">
+        <div class="header-content">
+            <a href="#" onclick="window.history.back(); return false;">
+                <img src="images/seta.png" alt="Imagem">
+            </a>
+            <b style="font-size: 20px; margin-left: 20px;">Carrinho de Pedidos</b>
+        </div> 
+    </header>
+    <!--HEADER-->
+
+    <!--OPCAO ENTREGA RETIRADA-->
+    <section style="background-color: #ebebeb; margin: 10px; margin-top: -20px;">
+        <div class="d-flex justify-content-between bd-gray mt-5">
+            <div class="p-2">
+                <b class="text-secondary subText" style="font-size: 14px">Dados do Cliente</b>
+            </div>
+            <div class="p-2 fg-gray align-self-center">
+                <p>                
+                </p>
+            </div>
+        </div>
+        </section>
+<div style="justify-content: flex-start;">
+    
+    <ul id="dadosConsumidor">
+
+    </ul>
+</div>
+<!--OPCAO ENTREGA RETIRADA-->   
+
+    <!--RESUMO DO CARRINHO-->
+    <section style="background-color: #ebebeb; margin: 10px; margin-top: -20px;">
+    <div class="d-flex justify-content-between bd-gray mt-5">
+        <div class="p-2">
+            <b class="text-secondary subText" style="font-size: 14px">Resumo do Pedido</b>
+        </div>
+        <div class="p-2 fg-gray align-self-center">
+            <p>                
+            </p>
+        </div>
+    </div>
+    </section>
+    <ul style="padding-left: 25px; list-style: none; margin: 0;">
+        <li style="display: flex;">
+            <div style="flex: 1;">
+                
+                <div id="tabelaPedidos">
+
+                </div>
+                
+                <ul style="padding-left: 0; list-style: none; margin: 0;">
+                    <li style="display: flex; justify-content: center;">
+                        <div>
+                            <span id="spanAdicionarMaisItens" style="color: #ce352c; margin-right: 15px;" onclick="adicionarMaisItens()">Adicionar mais Itens</span>
+                        </div>
+                    </li>
+                    <hr style="margin-left: -15px; margin-right: 10px;">
+                </ul>
+                <ul style="padding-left: 0; list-style: none; margin: 0;">
+                    <li style="display: flex;">
+                        <div class="row" style="flex: 1; display: flex;">
+                            <div style="flex: 1;">
+                                <p style="margin: 0;">
+                                    <b>Total:</b>
+                                </p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <p style="margin-right: 8px;">
+                                <b id="valorTotalCompra"></b>
+                            </p>
+                        </div>
+                    </li>
+                    <hr style="margin-left: -15px; margin-right: 10px; margin-bottom: -10px;">
+                </ul>
+            </div>
+        </li>
+    </ul>
+    <!--RESUMO DO CARRINHO-->
+    
+    <!--MODAL-->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p style="color: #28a745;">Pedido Enviado com Sucesso!</p>
+    </div>
+  </div>
+  <!--MODAL-->
+
+<!--OPCAO ENTREGA RETIRADA-->
+<section style="background-color: #ebebeb; margin: 10px;">
+    <div class="d-flex justify-content-between bd-gray mt-5">
+        <div class="p-2">
+            <b class="text-secondary subText" style="font-size: 12px">Escolha 1 Opção</b>
+        </div>
+        <div class="p-2 fg-gray align-self-center">
+            <p>
+                <span style="background-color: #53b611; font-size: 12px; color: white; padding: 2px; border-radius: 4px;"><strong>OBRIGATÓRIO</strong></span>
+            </p>
+        </div>
+    </div>
+</section>
+
+<div style="justify-content: flex-start;">
+    <ul style="list-style-type: none; padding: 10px;">
+        <li style="display:flex; margin-bottom: 10px;">
+            <div>
+                <span style="font-size: small;">
+                    <b>Entrega</b>
+                </span>
+                <br>
+                <span class="text-secondary">
+                    <b style="color: #ce352c; font-size: 14px;">Endereço de Cadastro</b>
+                </span>
+            </div>
+            <div class="ml-auto"> 
+                <input type="radio" name="opcao_entrega" id="entrega_endereco_cadastro"/>
+            </div>
+        </li>
+        <hr>
+        <li style="display:flex; margin-bottom: 10px;">
+            <div>
+                <span style="font-size: small;">
+                    <b>Retirada no local</b>
+                </span>
+                <br>
+                <span class="text-secondary">
+                    <b style="color: #ce352c; font-size: 14px;">Grátis</b>
+                </span>
+            </div>
+            <div class="ml-auto"> 
+                <input type="radio" name="opcao_entrega" id="retirada_local"/>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+<!--OPCAO ENTREGA RETIRADA-->   
+
+    <!--PAGAMENTOS-->
+    <section style="background-color: #ebebeb; margin: 10px; margin-top: -20px;">
+        <div class="d-flex justify-content-between bd-gray mt-5">
+            <div class="p-2">
+                <b class="text-secondary subText" style="font-size: 14px">Selecione Pagamento</b>
+            </div>
+            <div class="p-2 fg-gray align-self-center">
+                <p>
+                    <span  style="background-color: #53b611; font-size: 12px; color: white; padding: 2px; border-radius: 4px;"><strong>OBRIGATÓRIO</strong></span>
+                </p>
+            </div>
+        </div>
+    </section>
+    <div style="justify-content: flex-start;">
+        <ul style="list-style-type: none; padding: 10px;">
+            <li style="display:flex; margin-bottom: 10px;">
+                <div>
+                    <span style="font-size: small;">
+                        <b  id="cartao">Cartão</b>
+                    </span>
+                    <br>
+                    <span class="text-secondary">
+                        <b style="font-size: 14px;">Crédito e Débito</b>
+                    </span>
+                </div>
+                <div class="ml-auto"> 
+                    <input type="radio" name="opcao_pagamento" id="cartao_"/>
+                </div>
+            </li>
+            <hr>
+            <li style="display:flex; margin-bottom: 10px;">
+                <div>
+                    <span style="font-size: small;">
+                        <b id="dinheiro">Dinheiro</b>
+                    </span>
+                    <br>               
+                </div>
+                <div class="ml-auto"> 
+                    <input type="radio" name="opcao_pagamento" id="dinheiro_"/>
+                </div>
+            </li>
+            <hr>
+            <li style="display:flex; margin-bottom: 10px;">
+                <div>
+                    <span style="font-size: small;">
+                        <b id="pix">Pix</b>
+                    </span>
+                    <br>
+                </div>
+                <div class="ml-auto"> 
+                    <input type="radio" name="opcao_pagamento" id="pix_"/>
+                </div>
+            </li>
+            <hr>
+        </ul>
+    </div>
+    <!--PAGAMENTOS-->
+
+    <div id="faltaDados" class="modal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.4); justify-content: center; align-items: center;">
+        <div class="modal-content" style="background-color: white; padding: 20px; border-radius: 10px; width: 50%; text-align: center; position: relative;">
+            <span onclick="fecharModalF('faltaDados')" style="font-size: 15px; font-weight: bold; color: #aaa; float: right; cursor: pointer;">&times;</span>
+            <h6 style="color: black;">Nenhum produto selecionado</h6>
+            <button onclick="fecharModalF('faltaDados')" style="background-color: #37966F; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 20px;">OK</button>
+        </div>
+    </div>
+
+    <div id="faltaPag" class="modal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.4); justify-content: center; align-items: center;">
+        <div class="modal-content" style="background-color: white; padding: 20px; border-radius: 10px; width: 50%; text-align: center; position: relative;">
+            <span onclick="fecharModalP('faltaPag')" style="font-size: 15px; font-weight: bold; color: #aaa; float: right; cursor: pointer;">&times;</span>
+            <h6 style="color: black;">Selecione a forma de pagamento</h6>
+            <button onclick="fecharModalP('faltaPag')" style="background-color: #37966F; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 20px;">OK</button>
+        </div>
+    </div>
+
+    <div id="faltaEnd" class="modal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.4); justify-content: center; align-items: center;">
+        <div class="modal-content" style="background-color: white; padding: 20px; border-radius: 10px; width: 50%; text-align: center; position: relative;">
+            <span onclick="fecharModalE('faltaEnd')" style="font-size: 15px; font-weight: bold; color: #aaa; float: right; cursor: pointer;">&times;</span>
+            <h6 style="color: black;">Selecione a forma de entrega</h6>
+            <button onclick="fecharModalE('faltaEnd')" style="background-color: #37966F; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 20px;">OK</button>
+        </div>
+    </div>
+
+</body>
+<!--FOOTER-->
+<footer style="background-color: #fff; color: white; padding: 10px; text-align: center; position: fixed; bottom: 0; width: 100%;">
+    <button style="background-color: #ce352c; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; width: 100%;" onclick="concluirPedido()">Concluir Pedido</button>
+</footer>
+<!--FOOTER-->
+
+<script src="js/login.js"></script>
+
+<script src="js/carrinho.js"></script>
+<script>
+
+
+
+    function atualizarVisibilidadeEndereco() {
+        var entregaEnderecoCadastro = document.getElementById("entrega-enderecoCadastro");
+        var entregaEnderecoCadastroInput = document.getElementById("entrega_endereco_cadastro");
+        
+        if (entregaEnderecoCadastroInput.checked) {
+            entregaEnderecoCadastro.style.display = "block";
+        } else {
+          //  entregaEnderecoCadastro.style.display = "none";
+        }
+    }
+
+    var opcaoEntregaInputs = document.querySelectorAll('input[name="opcao_entrega"]');
+    opcaoEntregaInputs.forEach(function(input) {
+        input.addEventListener("change", atualizarVisibilidadeEndereco);
+    });
+
+    atualizarVisibilidadeEndereco();
+
+
+   
+    
+</script>
+
+</html>

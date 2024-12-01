@@ -1,0 +1,208 @@
+.header-content {
+display: flex;
+align-items: center;
+margin: 10px;
+}
+
+.header-content img {
+width: 20px; /* Ajuste o tamanho conforme necessário */
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+header {            
+    background-image: url('images/frango.jpg'); 
+    background-size:cover;
+    padding: 5px;
+    text-align: center;
+}
+h1 {
+    color: #333;
+    font-size: 32px;
+}
+img {
+    width: 20vw; /* 40% da largura da tela */
+    height: auto; /* altura automática proporcional à largura */
+    max-width: 200px; /* Largura máxima em pixels */
+    display: block; /* Garante que a imagem não cause problemas de layout */
+    margin: 0 auto; /* Centraliza a imagem */
+    border: 1px solid black; /* Borda de 4px sólida na cor branca */
+}
+
+.modal {
+    display: none; /* Escondida por padrão */
+    position: fixed;
+    z-index: 3;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7); /* Fundo escuro */
+    
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    text-align: center;
+}
+
+    
+.buttonOpen {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 25px;
+    font-size: 13px;
+    background-color: #fff;
+    color: rgb(0, 175, 38);
+    cursor: pointer;
+    border-radius: 15px;
+    border: 1px solid lightgray; /* Borda fina e light gray */ position: relative; z-index: 1;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+.search-bar {
+    position: relative; /* Fixa a barra de pesquisa em relação ao botão */
+    top: calc(100% + 10px); /* Posiciona abaixo do botão */
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para efeito visual */
+    padding: 10px;
+    z-index: 1; /* Garante que a barra de pesquisa esteja acima dos outros elementos */
+}
+
+.search-bar input[type="text"] {
+    width: calc(100% - 40px); /* Define a largura do campo de texto */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc; 
+}
+
+.search-bar button {
+    padding: 8px;
+    background-color: #e77b50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: nowrap; 
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;      
+    white-space: nowrap;
+}
+
+.buttons::-webkit-scrollbar {
+    display: inline-block; /* oculta a barra de rolagem em navegadores WebKit */
+}
+
+.buttonMenu{
+    display: block;          
+    padding: 5px 15px;
+    font-size: 14px;            
+    color: black;
+    cursor: pointer;            
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+    border-color: transparent;
+}
+.card {
+display:flex;
+margin-bottom: 20px;
+position: relative;
+}
+/* Estilos da linha */
+.card::after {
+content: '';
+position: absolute;
+bottom: 3px; /* Ajuste para posicionar a linha abaixo dos cards */
+left: 5%;
+width: 90%;
+height: 1px;
+background-color: #c5c4c4;
+}
+
+.image {
+flex: 0 0 130px; /* Largura da área reservada para a imagem */
+height: 90px; /* Altura da área reservada para a imagem */
+margin-left: 7px;
+margin-top: 15px;
+overflow: hidden; /* Para garantir que as imagens se ajustem à área reservada */
+}
+
+.image img {
+width: 80%;
+height: 80%;
+object-fit: cover; /* Garante que a imagem preencha todo o espaço reservado */
+}
+
+.info {
+padding: 10px;
+}
+
+.price {
+font-weight: bold;
+}
+
+.header {
+width: 100%;
+background-color: #fff;
+
+z-index: 1000;
+transition: top 0.3s ease-in-out; /* Para adicionar uma transição suave */
+}
+
+.fixed {
+position: fixed;
+top: 0;
+}
+
+/* Estilos CSS */
+.search-container {
+position: relative;
+}
+
+input[type="text"] {
+padding-right: 30px; /* Espaço para o ícone */
+}
+
+.fa-search {
+position: absolute;
+right: 30px; /* Ajuste a posição do ícone conforme necessário */
+top: 50%;
+transform: translateY(-50%);
+color: #888; /* Cor do ícone */
+}
+
+

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Página</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="config.js"></script>
+    <link rel="stylesheet" href="./css/cardapio.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        body {
+        overflow-x: hidden;
+    }
+  .footer {
+        background-color: rgb(255, 255, 255);
+        color: #020202;
+        padding: 10px; 
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: auto;
+        margin-bottom: -10px; 
+        font-size: 12px;
+        display: flex;
+        justify-content: space-around; 
+        margin-left: -10px;
+        margin-top: 1px; /* Adicione esta linha */
+        }
+
+
+        .option {
+            color: #808080; 
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+            line-height: 1.2;
+            position: relative;
+        }
+
+        .option i {
+            margin-bottom: 3px;
+            font-size: 1.2em;
+        }
+
+        .option.clicked i {
+            color: #000; 
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .badge {
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 3px; 
+            font-size: 17px; 
+            width: 10px; 
+            height: 10px; 
+            line-height: 1; 
+            text-align: center; 
+            position: absolute;
+            top: -8px; 
+            right: 10px; 
+        }
+
+
+    </style>
+</head>
+<body onload="estilo()">
+
+    <!--HEADER-->
+    <header id="capaEstabelecimento">
+       
+    </header>    
+    <!--HEADER-->
+
+    <!--INFORMAÇÕES-->
+    <div class="button-and-search">
+        <div style="text-align: center;" id="nomeEst">
+            
+        </div>
+        <button onclick="abrirModal('modalHorarios')" class="buttonOpen" id="estadoEstabelecimento"> <i class="fas fa-chevron-down icon" style="color: black;"></i></button>   
+        <div class="header">
+            <div class="buttons" id="categoriasEstabelecimento">
+                
+            </div>
+        
+            <div class="search-bar" style="max-width: 95vw;">
+                <div class="search-container" style="width: 100%;">
+                    <input type="text" placeholder="Pesquisar..." id="search-input" style="width: calc(100% - 30px); /* Ajuste conforme necessário */">
+                    <i class="fas fa-search" onclick="searchClicked()" style="margin-left: -30px;"></i>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!--INFORMAÇÕES-->
+
+    <div id="cardapio">
+
+    </div>
+
+    <!--CARDAPIO-->
+    <section>    
+        <div class="modal" id="modalPizzas" style="display: none;">
+            <div class="modal-lg modal-dialog-scrollable" style="height: 100%;">
+                <div style="background-color: #fffffffd; height: 100%;">               
+                    <div class="modal-body">                
+                        <form class="text-start">   
+                            <div class="header-content" style="display: flex; align-items: center;">
+                                <a href="#" onclick="fechaModalPizza()">
+                                    <img src="images/seta.png" alt="Imagem" style="width: 15px; border-color: transparent;">
+                                </a>
+                                <p style="margin-left: 5px;">Voltar</p>
+                            </div>                            
+                            <div class="card">                                                                           
+                                <div id="cardapioPizza">
+
+                                </div>
+                            </div>                                      
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--CARDAPIO-->
+
+    <!--HORARIOS-->
+    <div id="modalHorarios" class="modal">
+        <div class="modal-content">
+            <span onclick="fecharModal('modalHorarios')" style="float: right; cursor: pointer;">&times;</span>
+            <h2>Horários</h2>
+            <table id="horasFuncionamento">
+                
+                
+            </table>
+        </div>
+    </div>
+    <!--HORARIOS-->
+
+    <!--HORARIOS-->
+    <div id="modalFechado" class="modal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.4); justify-content: center; align-items: center;">
+        <div class="modal-content" style="background-color: white; padding: 20px; border-radius: 10px; width: 50%; text-align: center; position: relative;">
+            <span onclick="fecharModalF('modalFechado')" style="font-size: 30px; font-weight: bold; color: #aaa; float: right; cursor: pointer;">&times;</span>
+            <h2 style="color: red;">Estabelecimento Fechado!</h2>
+            <button onclick="fecharModalF('modalFechado')" style="background-color: #37966F; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 20px;">Okay</button>
+        </div>
+    </div>
+    <!--HORARIOS-->
+
+    <div style="height: 70px;">
+
+    </div>
+
+    <!--CARRINHO FINAL-->
+    <!-- <div id="fot" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background-color: #333; color: #fff; background-color: #ffbe33; padding: 10px;">
+        <div id="fotercompras">
+            
+        </div>           
+    </div> -->
+    <!--CARRINHO FINAL-->
+
+    <!--NOVO FOOTER-->
+    <footer class="footer">
+        <a href="cardapioNovo.html" class="option" data-target="home">
+            <i class="fas fa-home"></i>
+            <span>Início</span>
+        </a>
+        <!-- <a href="historicoPedidos.html" class="option" data-target="pedidos">
+            <i class="fas fa-utensils"></i>
+            <span>Pedidos</span>
+        </a> -->
+        <!-- <a href="#" class="option" data-target="promocoes">
+            <i class="fas fa-tags"></i>
+            <span>Promoções</span>
+        </a> -->
+        <a href="carrinhoNovo.html" class="option" data-target="carrinho" id="carrinhoIcon">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Carrinho</span>
+            <span id="cartBadge" class="badge" style="display:none">*</span>
+        </a>
+    </footer>
+    
+       <!--NOVO FOOTER-->
+
+    <!--FOOTER-->
+    <!-- <footer>
+        <p style="font-size: 10px; padding: 15px 0px; color: rgb(158, 158, 158);">&copy; 2024 Águia Delivery. Aplicativo de Delivery da Empresa Águia Sistemas.</p>
+    </footer> -->
+    <!--FOOTER-->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var options = document.querySelectorAll('.option');
+    
+    options.forEach(function(option) {
+        option.addEventListener('click', function() {
+        var target = this.getAttribute('data-target');
+        options.forEach(function(o) {
+            o.classList.remove('clicked');
+        });
+        this.classList.add('clicked');
+        localStorage.setItem('activeOption', target);
+        });
+    });
+
+    var activeOption = localStorage.getItem('activeOption');
+    if (activeOption) {
+        document.querySelector('.option[data-target="' + activeOption + '"]').classList.add('clicked');
+    }
+    });
+
+
+
+    function verificarParametrosURL() {
+    const parametros = new URLSearchParams(window.location.search);
+    if (parametros.get('exibirFooter') === 'true') {
+        var cartBadge = document.getElementById('cartBadge');
+        if (cartBadge) {
+            cartBadge.style.display = 'inline-block';
+        }
+    }
+    
+    var produtosRegistrados = localStorage.getItem('produtosRegistrados');
+    console.log(produtosRegistrados)
+    if (!produtosRegistrados || produtosRegistrados === '[]') {
+        var cartBadge = document.getElementById('cartBadge');
+        if (cartBadge) {
+            cartBadge.style.display = 'none';
+        }
+    }
+}
+
+window.addEventListener('load', verificarParametrosURL);
+
+
+    function abrirModal(idModal) {
+        buscarHorarios();
+        document.getElementById(idModal).style.display = 'block';
+    }
+
+    function fecharModal(idModal) {
+        document.getElementById(idModal).style.display = 'none';
+    }
+    let isHeaderFixed = false;
+
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.header');
+        const buttonSection = document.querySelector('.buttons');
+        const buttonSectionTop = buttonSection.getBoundingClientRect().top;
+
+        if (window.scrollY >= buttonSectionTop) {
+            header.classList.add('fixed');
+        } else {
+            header.classList.remove('fixed');
+        }
+        if (window.scrollY === 0) {
+            header.classList.remove('fixed'); 
+        }
+    });    
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.addEventListener('click', function() {
+          
+            const novaPagina = 'cardapioDetalhe.html';
+            window.location.href = novaPagina;
+        });
+    });
+
+    function fechaModalPizza(){
+        document.getElementById('modalPizzas').style.display = 'none';
+    }
+    
+</script>
+
+<script src="js/cardapio.js"></script>
+
+</body>
+</html>

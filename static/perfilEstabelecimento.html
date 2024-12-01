@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="shortcut icon" type="imagem/x-icon" href="/images/browse.jpg" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-4Ck0f0ewebqg6Jpya8wuNjk1zJ5mPAyGyLkG8f5hRzP+JwTyUj2KrpJl9RLz/5al" crossorigin="anonymous">
+    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m9.25 22l-.4-3.2q-.325-.125-.613-.3t-.562-.375L4.7 19.375l-2.75-4.75l2.575-1.95Q4.5 12.5 4.5 12.337v-.674q0-.163.025-.338L1.95 9.375l2.75-4.75l2.975 1.25q.275-.2.575-.375t.6-.3l.4-3.2h5.5l.4 3.2q.325.125.613.3t.562.375l2.975-1.25l2.75 4.75l-2.575 1.95q.025.175.025.338v.674q0 .163-.05.338l2.575 1.95l-2.75 4.75l-2.95-1.25q-.275.2-.575.375t-.6.3l-.4 3.2h-5.5ZM11 20h1.975l.35-2.65q.775-.2 1.438-.588t1.212-.937l2.475 1.025l.975-1.7l-2.15-1.625q.125-.35.175-.737T17.5 12q0-.4-.05-.787t-.175-.738l2.15-1.625l-.975-1.7l-2.475 1.05q-.55-.575-1.212-.962t-1.438-.588L13 4h-1.975l-.35 2.65q-.775.2-1.437.588t-1.213.937L5.55 7.15l-.975 1.7l2.15 1.6q-.125.375-.175.75t-.05.8q0 .4.05.775t.175.75l-2.15 1.625l.975 1.7l2.475-1.05q.55.575 1.213.963t1.437.587L11 20Zm1.05-4.5q1.45 0 2.475-1.025T15.55 12q0-1.45-1.025-2.475T12.05 8.5q-1.475 0-2.488 1.025T8.55 12q0 1.45 1.012 2.475T12.05 15.5ZM12 12Z"/></svg>
+    <title>Dashboard - Águia Delivery</title>
+    <script src="config.js"></script>
+    <style>
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border: 1px solid #ccc;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Mostra o menu suspenso ao clicar */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+
+<body onload="carregarDados()">
+    <!--MENU-->
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="images/chef.png" alt="logo" style="width: 30px;">
+                </span>
+                <div class="text logo-text">                    
+                    <span class="profession">Águia Delivery</span>
+                </div>
+            </div>
+            <i class='bx bx-chevron-right toggle' style="background-color: #ffbe33"></i>
+        </header>    
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class="menu-links recuo">
+                  <li class="search-box" style="display: none;">
+                  </li>
+                    <li class="nav-link">
+                        <a href="dashboard.html">
+                            <i class='bx bx-home-alt icon'></i>
+                            <span class="text nav-text" style="font-size: 15px;">Início</span>
+                        </a>
+                    </li>       
+                    <hr>
+                    <li class="nav-item">
+                        <i class='bx bx-dots-horizontal icon'></i>
+                        <span style="color: rgb(177, 176, 176);">Opções</span>
+                    </li>
+                    <li class="nav-link">
+                        <a href="dashboard.html">
+                            <i class='bx bx-shopping-bag icon'></i>
+                            <span class="text nav-text" style="font-size: 15px;">Pedidos</span>
+                        </a>
+                    </li>   
+    
+                    <li class="nav-link">
+                        <a href="categoriaDashboard.html">
+                            <i class='bx bx-category icon'></i>
+                            <span class="text nav-text" style="font-size: 15px;">Cardápio</span>
+                        </a>
+                    </li>             
+                    <li class="nav-link">
+                        <a href="relatorioPedido.html">
+                            <i class='bx bxs-file icon'></i>
+                            <span class="text nav-text" style="font-size: 15px;">Relatório</span>
+                        </a>
+                    </li>         
+                 
+                    <hr>
+                    <li class="nav-item">
+                        <i class='bx bx-dots-horizontal icon'></i>
+                        <span style="color: rgb(177, 176, 176);">Meu Perfil</span>
+                    </li>
+                    <li class="nav-link">
+                        <a href="perfilEstabelecimento.html">
+                            <i class='bx bx-store icon'></i>
+                            <span class="text nav-text" style="font-size: 15px;">Editar Perfil</span>
+                        </a>
+                    </li>   
+                    <li class="nav-link">
+                        <a href="manualUsuario.html" target="_blank">
+                            <!-- Ícone de Warning -->
+                            <i class='bx bx-error-circle icon' style="color: #FF9800;"></i>
+                            <span class="text nav-text" style="font-size: 15px;">Manual</span>
+                        </a>
+                    </li>
+                                        
+                </ul>
+            </div>         
+    
+            <div class="bottom-content">
+                <ul class="menu-links recuo">
+                    <li>
+                        <a href="index.html">
+                            <i class='bx bx-log-out icon'></i>
+                            <span class="text nav-text" style="font-size: 15px;">Sair</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--MENU-->
+
+    <!--FORMULARIO-->
+    <section class="home">
+        <div class="main-content">
+        <div class="container-fluid">
+            <div class="mb-5 text-blue saudacao">
+            <h2 id="saudacao"></h2>
+            </div>  
+            <div class="header-body">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-9">
+                        <div class="card card-stats mb-4 mb-xl-0 border-0">
+                            <div class="card-body" style="background-color: whitesmoke;">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Perfil do Estabelecimento</h5>
+                                    </div>
+                                    <div class="col-auto">
+                                        <form class="row align-items-center">
+                                            
+                                            <div class="col-auto">
+                                                <button class="btn btn-lg btn-success" type="button" style="font-size: 14px;" onclick="gravarAlteracoes()">ALTERAR</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>          
+        <br>
+        <div class="card" style="border: 1px solid transparent; background-color: whitesmoke; padding: 10px 20px 0px 20px ">
+            <table class="table table-striped">
+                <form>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h6 class="mr-3"><strong>Informações da Conta</strong></h6>
+                        <!-- Botão Horário de Funcionamento -->
+                        <button id="btnHorarioFuncionamento" class="btn btn-secondary" type="button" onclick="abrirModal('modalHorarios')">Horário de Funcionamento</button>
+
+
+                    </div>
+                    
+                    
+                    
+                    
+                    <p></p>
+                    <div class="form-group mb-2">
+                    <label for="formGroupExampleInput">Nome do Estabelecimento</label>
+                    <input type="text" class="form-control" id="inputEstabelecimento" placeholder="Nome do Estabelecimento">
+                    </div>
+                    <div class="form-group mb-2">
+                    <label for="formGroupExampleInput2">Nome Fantasia</label>
+                    <input type="text" class="form-control" id="inputFantasia" placeholder="Nome Fantasia">
+                    </div>
+                    <div class="row form-group mb-2">
+                        <div class="col">
+                        <label for="formGroupExampleInput">CNPJ</label>
+                        <input type="text" class="form-control" id="inputCnpj" placeholder="00.000.000/0000-00" onkeyup="applyCNPJMask(event)">
+                        </div>
+                        <div class="col">
+                        <label for="formGroupExampleInput">Email Principal</label>
+                        <input type="text" class="form-control" id="inputEmail" placeholder="Estabelecimento@gmail.com">
+                        </div>
+                    </div>
+                    <div class="row form-group mb-2">
+                        <div class="col">
+                        <label for="formGroupExampleInput">Telefone</label>
+                        <input type="text" class="form-control" id="inputTelefone" placeholder="(00)00000-0000" maxlength="15" onkeyup="applyPhoneMask(event)">
+                        </div>
+                        <div class="col">
+                        <label for="formGroupExampleInput">Celular</label>
+                        <input type="text" class="form-control" id="inputCelular" placeholder="(00)00000-0000" maxlength="15" onkeyup="applyPhoneMask(event)">
+                        </div>
+                    </div>
+                    <div class="form-group form-group mb-2">
+                        <label for="formGroupExampleInput">Descrição</label>
+                        <input type="text" class="form-control" id="inputDesc" placeholder="Descrição">
+                    </div>
+                    <div class="form-group d-flex flex-column form-group mb-2">
+                        <label for="formGroupExampleInput">Logo do Estabelecimento</label>
+                        <input type="file" id="inputImagem" accept="image/*" onchange="encodeImageFileAsURL(this)">
+                    </div>
+                    
+                    <p></p>
+                    <h6><strong>Informações de Endereço</strong></h6>
+                    <p></p>
+                    <div class="form-group mb-2">
+                        <label for="formGroupExampleInput">Logradouro</label>
+                        <input type="text" class="form-control" id="inputLog" placeholder="Endereço">
+                    </div>
+                    <div class="row form-group mb-2">
+                        <div class="col">
+                        <label for="formGroupExampleInput">Bairro</label>
+                        <input type="text" class="form-control" id="inputBairro"  placeholder="Bairro">
+                        </div>
+                        <div class="col">
+                        <label for="formGroupExampleInput">CEP</label>
+                        <input type="text" class="form-control" id="inputCep" placeholder="00000-000" maxlength="9" onkeyup="applyZipCodeMask(event)">
+                        </div>
+                    </div>
+                    <div class="row form-group mb-2">
+                        <div class="col">
+                        <label for="formGroupExampleInput">Numero</label>
+                        <input type="text" class="form-control" id="inputNumero" placeholder="000">
+                        </div>
+                        <div class="col">
+                            <label for="formGroupExampleInput">Estado</label>
+                            <input type="text" class="form-control" id="inputUf" placeholder="Estado">
+                        </div>
+                        <div class="col">
+                            <label for="formGroupExampleInput">Cidade</label>
+                            <input type="text" class="form-control" id="inputCit" placeholder="Cidade">
+                        </div>
+                    </div>
+                    
+                </form>
+            </table>
+        </div>
+        </div>
+    </section>
+   <!--FORMULARIO-->
+
+
+<!--MODAL HORARIOS-->
+<div id="modalHorarios" class="modal" style="padding: 220px 80px;">
+    <div class="modal-content" style="background-color: #fffffffd; height: 100%;">
+        <span onclick="fecharModal('modalHorarios')" style="float: right; cursor: pointer;">&times;</span>
+        
+        <!-- Linha com os botões Adicionar e Excluir -->
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3>Adicionar Horário</h3>
+            <div>
+                <!-- Botão de Excluir -->
+                <button onclick="exibirModalExcluir()" style="margin-left: 10px;" class="btn btn-danger">Excluir Horário</button>
+            </div>
+        </div>
+        
+        <table id="tabelaHorarios">
+            <tr>
+                <th>Dia</th>
+                <th>Horário Inicial</th>
+                <th>Horário Final</th>
+            </tr>
+            <!-- Linhas da tabela serão adicionadas dinamicamente aqui -->
+        </table>
+        
+        <div style="display: table;">
+            <div style="display: table-row;">
+                <div style="display: table-cell; padding-right: 10px;">
+                    <label for="dia">Dia:</label>
+                    <div class="dropdown">
+                        <input type="text" id="dia" class="form-control" placeholder="Selecione um dia" readonly>
+                        <div class="dropdown-content" id="diasSemana">
+                            <a href="#" data-dia="0">Domingo</a>
+                            <a href="#" data-dia="1">Segunda-feira</a>
+                            <a href="#" data-dia="2">Terça-feira</a>
+                            <a href="#" data-dia="3">Quarta-feira</a>
+                            <a href="#" data-dia="4">Quinta-feira</a>
+                            <a href="#" data-dia="5">Sexta-feira</a>
+                            <a href="#" data-dia="6">Sábado</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="display: table-cell; padding-right: 10px;">
+                    <label for="horaInicial">Horário Inicial:</label>
+                    <input type="text" id="horaInicial" class="form-control" placeholder="HH:MM:SS" maxlength="8" oninput="mascaraHora(this)">
+                </div>
+                
+                <div style="display: table-cell;">
+                    <label for="horaFinal">Horário Final:</label>
+                    <input type="text" id="horaFinal" class="form-control" placeholder="HH:MM:SS" maxlength="8" oninput="mascaraHora(this)">
+                </div>
+                
+                <div style="display: table-cell;">                    
+                    <button class="btn btn-secondary" onclick="adicionarHorario()" style="margin-top: 78px; margin-left: 5px;">Adicionar</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<!--MODAL HORARIOS-->
+
+<!--MODAL EXCLUIR HORARIOS-->
+<div id="modalExcluir" class="modal" style="display:none; padding: 220px 80px;">
+    <div class="modal-content" style="background-color: #fffffffd; height: 80%;">
+        <span onclick="fecharModal('modalExcluir')" style="float: right; cursor: pointer;">&times;</span>
+        
+        <h3>Excluir Horário</h3>
+        
+        <!-- Tabela de Horários Cadastrados -->
+        <table id="tabelaExcluir">
+            <tr>
+                <th>Dia</th>
+                <th>Horário Inicial</th>
+                <th>Horário Final</th>
+                <th>Excluir</th>
+            </tr>
+            <!-- Linhas da tabela serão preenchidas dinamicamente -->
+        </table>
+        
+    </div>
+</div>
+<!--MODAL EXCLUIR HORARIOS-->
+
+
+    <!--HORARIOS-->
+    <div id="modalHora" class="modal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.4); justify-content: center; align-items: center;">
+        <div class="modal-content" style="background-color: white; padding: 20px; border-radius: 10px; width: 50%; text-align: center; position: relative;">
+            <span onclick="fecharModalH('modalHora')" style="font-size: 30px; font-weight: bold; color: #aaa; float: right; cursor: pointer;">&times;</span>
+            <h2 style="color: red;">Estabelecimento Fechado!</h2>
+            <button onclick="fecharModalH('modalHora')" style="background-color: #37966F; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 20px;">Okay</button>
+        </div>
+    </div>
+    <!--HORARIOS-->
+    
+
+</div>
+
+</body>
+<!--<script src="js/dashboard.js"></script>-->
+<script src="js/estabelecimento.js"></script>
+<script src="js/mask.js"></script><!--Porque utiliza as mascaras de formatação-->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/dashboard.js"></script>
+<script>
+
+function excluirHorario(id) {
+        var token = localStorage.getItem('token');
+        fetch(`http://localhost:5252/api/Horario/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        })
+        .then(response => {
+           location.reload();
+        })
+            .catch(error => {
+                console.error('Erro:', error);
+        });
+    }
+
+function exibirModalExcluir() {
+        // Chama a função para buscar os horários da API
+        buscarHorarios();
+        
+        // Exibe a modal de exclusão
+        document.getElementById('modalExcluir').style.display = 'block';
+    }
+
+    // Função para buscar os horários da API e preencher a tabela na modal de exclusão
+    function buscarHorarios() {
+        var id = localStorage.getItem('id');
+        fetch(apiUrl + `/api/Horario?EstabelecimentoId=${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            var tabelaExcluir = document.getElementById('tabelaExcluir');
+
+            // Limpa a tabela de exclusão antes de adicionar os novos dados
+            tabelaExcluir.innerHTML = `
+                <tr>
+                    <th>Dia</th>
+                    <th>Horário Inicial</th>
+                    <th>Horário Final</th>
+                    <th>Excluir</th>
+                </tr>
+            `;
+
+            // Preenche a tabela com os dados recebidos da API
+            for (var i = 0; i < data.length; i++) {
+                var diaDaSemana = transformarDia(data[i].dia); // Função para transformar o número do dia em texto
+                tabelaExcluir.innerHTML += `
+                    <tr>
+                        <td>${diaDaSemana}</td>
+                        <td>${data[i].abre}</td>
+                        <td>${data[i].fecha}</td>
+                        <td><button onclick="excluirHorario(${data[i].horarioId})" class="btn btn-danger">Excluir</button></td>
+                    </tr>
+                `;
+            }
+        })
+        .catch(error => console.error('Erro:', error));
+    }
+
+    function transformarDia(dia) {
+        const diasDaSemana = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+        return diasDaSemana[dia];
+    }
+
+
+    function mascaraHora(input) {
+    let valor = input.value.replace(/\D/g, ''); // Remove qualquer caractere não numérico
+    if (valor.length <= 2) {
+        valor = valor.replace(/(\d{2})/, '$1'); // Formata as 2 primeiras cifras para HH
+    } else if (valor.length <= 4) {
+        valor = valor.replace(/(\d{2})(\d{2})/, '$1:$2'); // Formata a parte das horas para HH:mm
+    } else if (valor.length <= 6) {
+        valor = valor.replace(/(\d{2})(\d{2})(\d{2})/, '$1:$2:$3'); // Formata a parte para HH:mm:ss
+    } else {
+        valor = valor.substring(0, 8); // Limita o valor a 8 caracteres (HH:mm:ss)
+    }
+    input.value = valor; // Atualiza o valor do campo
+}
+    document.querySelectorAll('.dropdown-content a').forEach(function (item) {
+            item.addEventListener('click', function (e) {
+                // Impede a ação padrão de link
+                e.preventDefault();
+
+                // Atualiza o campo de texto com o nome do dia selecionado
+                document.getElementById('dia').value = item.textContent;
+
+                // Aqui você pode pegar o ID do dia para utilizá-lo, se necessário
+                var diaSelecionado = item.getAttribute('data-dia');
+                console.log("Dia selecionado (ID):", diaSelecionado); // Aqui você pode fazer algo com o ID do dia
+
+                // Fecha o dropdown após selecionar
+                document.getElementById('diasSemana').style.display = 'none';
+            });
+        });
+
+        // Fecha o dropdown se o usuário clicar fora
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown input')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === 'block') {
+                        openDropdown.style.display = 'none';
+                    }
+                }
+            }
+        };
+
+        // Abre o dropdown ao clicar no campo de texto
+        document.getElementById('dia').addEventListener('click', function() {
+            document.getElementById('diasSemana').style.display = 'block';
+        });
+</script>
+</html>

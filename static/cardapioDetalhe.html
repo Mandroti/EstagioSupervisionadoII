@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link para o CSS do Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Opcional: Link para o JavaScript do Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="config.js"></script>
+    <title>Document</title>
+    <style>
+        .header-content {
+        display: flex;
+        align-items: center;
+        margin: 10px;
+        }
+
+        .header-content img {
+        width: 20px; 
+        }
+    </style>
+</head>
+<body>
+    <!--HEADER-->
+    <header style="margin-bottom: -20px;">
+        <div class="header-content" >
+            <a href="#" onclick="window.history.back(); return false;">
+                <img src="images/seta.png" alt="Imagem">
+            </a>
+            <div id="tituloProduto">
+
+            </div>
+        </div> 
+    </header>
+    <!--HEADER-->
+
+    <section id="fotoProduto">
+        
+    </section>
+    
+    <!--OPÇÕES BORDAS E MASSAS-->
+    <section style="background-color: #ebebeb; margin: 10px;" id="bordas">
+        <div class="d-flex justify-content-between bd-gray mt-5">
+            <div class="p-2">
+                <p style="margin-top: 5px; margin-bottom: 5px; font-size: small;">
+                    <b>Bordas e Massas</b>
+                </p>
+                <p class="text-secondary subText" style="font-size: 12px">Escolha 1 Opção</p>
+            </div>
+            <div class="p-2 fg-gray align-self-center">
+                <p>
+                    <span  style="background-color: #53b611; font-size: 12px; color: white; padding: 2px; border-radius: 4px;"><strong>OPCIONAL</strong></span>
+                </p>
+            </div>
+        </div>
+    </section>
+    <div style="justify-content: flex-start;" id="bordas2">
+        <ul style="list-style-type: none; padding: 10px;" id="listaBordas">        
+        </ul>
+    </div>
+    <!--OPÇÕES BORDAS E MASSAS-->
+
+   <div id="pizzas"> 
+        
+   </div>
+
+    <!--OPÇÕES COMPLEMENTOS-->
+    <section style="background-color: #ebebeb; margin: 10px;" id="complementos">
+        <div class="d-flex justify-content-between bd-gray mt-5">
+            <div class="p-2">
+                <p style="margin-top: 5px; margin-bottom: 5px; font-size: small;">
+                    <b>Complementos</b>
+                </p>
+                <p id="qtdeComplem" class="text-secondary subText" style="font-size: 12px"></p>
+            </div>
+            <div class="p-2 fg-gray align-self-center">
+                <p>
+                    <span  style="background-color: #53b611; font-size: 12px; color: white; padding: 2px; border-radius: 4px;"><strong>OPCIONAL</strong></span>
+                </p>
+            </div>
+        </div>
+    </section>
+    <div style="justify-content: flex-start;">
+        <ul style="list-style-type: none; padding: 10px;" id="listaComplementos">    
+        </ul>
+    </div>
+    <!--OPÇÕES COMPLEMENTOS-->
+
+    <!--OPÇÕES VARIAÇÕES-->
+    <section style="background-color: #ebebeb; margin: 10px;" id="variacao">
+        <div class="d-flex justify-content-between bd-gray mt-5">
+            <div class="p-2">
+                <p style="margin-top: 5px; margin-bottom: 5px; font-size: small;">
+                    <b>Variações</b>
+                </p>
+                <p class="text-secondary subText" style="font-size: 12px">Escolha 1 opção</p>
+            </div>
+            <div class="p-2 fg-gray align-self-center">
+                <p>
+                    <span  style="background-color: #53b611; font-size: 12px; color: white; padding: 2px; border-radius: 4px;"><strong>OBRIGATÓRIO</strong></span>
+                </p>
+            </div>
+        </div>
+    </section>
+    <div style="justify-content: flex-start;">
+        <ul style="list-style-type: none; padding: 10px;" id="itensVariacao"> 
+            
+        </ul>
+    </div>
+    <!--OPÇÕES VARIAÇÕES-->
+
+   <div style="height: 90px;">
+
+   </div>
+
+    <!--FOOTER-->
+    <footer id="footerFixo" style="position: fixed; bottom: 0; left: 0; right: 0; background-color: #fff; padding: 10px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center;">
+                <button onclick="diminuirQuantidade();" style="width: 30px; color: #fff; background-color: #ce352c; border-color: transparent; border-radius: 4px;">
+                    <strong>-</strong>
+                </button>
+                <input type="text" id="quantidadeFooter" value="1" style="margin: 0 15px; border-color: transparent; width: 20px; text-align: center;" readonly />
+                <button onclick="aumentarQuantidade();" style="width: 30px; color: #fff; background-color: #ce352c; border-color: transparent; border-radius: 4px;">
+                    <strong>+</strong>
+                </button>
+
+            </div>
+            <button onclick="adicionarCarrinho();" style="background-color: #ce352c; color: white; border: none; padding: 8px 16px; border-radius: 4px; margin-left: auto; font-size: small;"><strong>Adicionar ao Carrinho</strong></button>
+        </div>
+        <div>
+            <label for="observacao" style="font-size: 14px;">Observação:</label><br>
+            <textarea id="observacao" rows="2" style="border: 1px solid #ce352c; width: 100%; box-sizing: border-box;"></textarea>
+        </div>
+    </footer>
+    <!--FOOTER-->
+  </div>
+  
+</body>
+<script>
+function escolhe(){
+    var produto = localStorage.getItem('produto');
+    if(produto == 0){
+        cardapioDetalhes();
+    }
+    else{
+        exibirDetalhesProduto();
+    }
+}
+window.onload = escolhe;
+ 
+</script>
+<script src="js/pedido.js"></script>
+</html>

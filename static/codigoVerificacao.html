@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">    
+    <!-- Style -->
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="shortcut icon" href="images/favicon.png" type="">
+    <title>Águia Delivery</title>
+    <script src="config.js"></script>
+    <style>       
+        /* input[type="text"] {
+          width: 40px;
+          height: 40px;
+          text-align: center;
+          margin: 5px;
+        } */
+        form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  display: flex;
+  gap: 10px; 
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  width: 50px; 
+  height: 50px; 
+  text-align: center;
+  font-size: 20px; 
+}
+
+input[type="button"] {
+  width: calc(6 * 50px + 5 * 10px); 
+  background-color: #ffbe33;
+  border: none;
+  cursor: pointer;
+  padding: 12px;
+  font-size: 16px;
+} 
+
+      </style>    
+</head>
+
+<body>
+  
+  <!--HEADER-->
+  <div class="navbar d-lg-none d-xl-none bg-light navbar-light" style="height: 80px;">
+    <div class="container-fluid">
+        <a href="index.html" class="navbar-brand" style="position: absolute; top: 50%; transform: translateY(-50%);">
+            <img src="images/logoteste.png" alt="Águia Delivery" style="height: 150px; width: auto;">
+        </a>         
+        <div class="collapse navbar-collapse" id="navbarCollapse" style="font-weight: bold;">
+            <ul class="navbar-nav mx-auto"></ul>
+            <div class="user_option mx-auto">              
+            </div>
+        </div>
+    </div>
+  </div>
+  <!--HEADER-->
+
+  <!--FORMULARIO-->
+  <div class="d-lg-flex half">
+    <div class="bg order-1 order-md-2 mobile-hidden" style="background-image: url(https://wallpapercrafter.com/desktop/43381-panini-ham-cheese-salad-bread-baske.jpg);">
+    </div>
+    <div class="contents order-2 order-md-2">
+      <div class="container custom-navbar">
+        <div class="row align-items-center justify-content-center align-items-center-mobile">
+          <div class="col-md-9">
+            <h3>Verificar Código <strong>Águia Delivery</strong></h3>
+            <label for="username">Insira o código:</label>
+            <form>
+              <div class="form-group ">
+                <input type="text" id="input1" maxlength="1" onkeyup="moveToNext(1, event)">
+                <input type="text" id="input2" maxlength="1" onkeyup="moveToNext(2, event)">
+                <input type="text" id="input3" maxlength="1" onkeyup="moveToNext(3, event)">
+                <input type="text" id="input4" maxlength="1" onkeyup="moveToNext(4, event)">
+                <input type="text" id="input5" maxlength="1" onkeyup="moveToNext(5, event)">
+                <input type="text" id="input6" maxlength="1" onkeyup="moveToNext(6, event)">
+              </div>                           
+              <input type="button" value="VERIFICAR" class="btn btn-block" style="background-color: #ffbe33;" onclick="verificarCodigo()">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>   
+  <!--FORMULARIO-->
+
+<script>
+    function moveToNext(nextInput, event) {
+      const maxLength = 1;
+      const currentLength = event.target.value.length;
+
+      if (currentLength >= maxLength) {
+        if (nextInput < 6) {
+          document.querySelector(`input[maxlength="1"]:nth-child(${nextInput + 1})`).focus();
+        }
+      }
+    }
+
+function ConfirmaCodigoSmsAlterar(concatenatedValue,idConsumidor) {
+  fetch(apiUrl + `/api/Consumidor/ConfirmarTelefone/${idConsumidor}/${concatenatedValue}?RedefinicaoSenha=true`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Erro ao verificar código no consumidor');
+    }
+    return response.text();  
+  })
+  .then(data => {
+    console.log("Resposta da API:", data);
+    setTimeout(() => {
+      window.location.href = "novaSenha.html?Consumidor";
+    }, 3000);
+  })
+  .catch(error => {
+    console.error('Erro no consumidor:', error);
+  });
+}
+  
+function ConfirmaCodigoEmailAlterar(concatenatedValue,email){
+  fetch(apiUrl +`/api/Estabelecimento/ConfirmarEmail/${email}/${concatenatedValue}?RedefinicaoSenha=true`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Erro ao verificar código no estabelecimento');
+    }
+    return response.text();  
+  })
+  .then(data => {
+    console.log("Resposta da API:", data);
+    setTimeout(() => {
+      window.location.href = "novaSenha.html?Estabelecimento";
+    }, 3000);
+  })
+  .catch(error => {
+    console.error('Erro no estabelecimento:', error);
+  });
+}
+
+function verificarCodigo() {
+    var idConsumidor = localStorage.getItem('telefoneClienteAlterar');
+    alert(idConsumidor)
+    var email = localStorage.getItem('emailEstab')
+    alert(email)
+    const input1 = document.getElementById('input1').value;
+    const input2 = document.getElementById('input2').value;
+    const input3 = document.getElementById('input3').value;
+    const input4 = document.getElementById('input4').value;
+    const input5 = document.getElementById('input5').value;
+    const input6 = document.getElementById('input6').value;
+ 
+    const concatenatedValue = input1 + input2 + input3 + input4 + input5 + input6;
+    const consumidorUrl = apiUrl + `/api/Consumidor/ConfirmarTelefone/${idConsumidor}/${concatenatedValue}`;
+    const estabelecimentoUrl = apiUrl + `/api/Estabelecimento/ConfirmarEmail/${email}/${concatenatedValue}`;
+
+    localStorage.setItem('codigoAlterar',concatenatedValue);
+    
+
+    if(window.location.href.includes("RecuperarCliente")){   
+    
+      ConfirmaCodigoSmsAlterar(concatenatedValue,idConsumidor); //vai para nova senha
+      return;
+    }
+
+
+    if(window.location.href.includes("RecuperarEstabelecimento")){
+     
+      ConfirmaCodigoEmailAlterar(concatenatedValue,email); //vai para nova senha
+      return;
+    }
+   
+    fetch(consumidorUrl, {             
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',                       
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao verificar código no consumidor');
+        }
+        return response.text();
+    })
+    .then(data => {
+       
+        setTimeout(() => {
+            window.location.href = "index.html"; 
+        }, 3000); 
+    })
+    .catch(error => {
+        console.error('Erro no consumidor, tentando a rota do estabelecimento:', error);
+        
+        
+      fetch(estabelecimentoUrl, {             
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json',                       
+          }
+      })
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Erro ao verificar código no estabelecimento');
+          }
+          return response.text();
+      })
+      .then(data => {
+          
+          setTimeout(() => {
+              window.location.href = "login.html"; 
+          }, 3000); 
+      })
+      .catch(error => {
+          console.error('Erro ao verificar código no estabelecimento:', error);
+      });
+  });
+}
+
+</script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
